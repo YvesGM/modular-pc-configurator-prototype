@@ -24,50 +24,54 @@ Ziel des Projekts ist die Entwicklung einer wartbaren Architektur mit zentralisi
 ## Geplante Architektur
 Der Konfigurator wird in einer modularen Architektur aufgebaut:
 
+```text
 root/
-|
-|__ public/
-|   |__ index.php
-|   |__ configure.php
-|   |__ assets/
-|   |   |__ css/
-|   |__ |__ js/
-|
-|__ src/
-|   |__ components/
-|   |   |__ core/
-|   |   |   |__ CPU.php
-|   |   |   |__ GPU.php
-|   |   |   |__ RAM.php
-|   |   |   |__ Motherboard.php
-|   |   |   |__ PSU.php
-|   |   |__ system/
-|   |   |   |__ Case.php
-|   |   |   |__ Cooling.php
-|   |   |   |__ Fans.php
-|   |   |__ accessories/
-|   |   |__ |__ Cables.php
-|   |  
-|   |__ configurator/
-|   |   |__ ConfiguratorService.php
-|   |   |__ CompatibilityService.php
-|   |   |__ PricingService.php
-|   |  
-|   |__ repository/
-|   |   |__ ComponentRepository.php
-|   |   |__ RuleRepository.php
-|   |  
-|   |__ database/
-|   |__ |__ Database.php
-|     
-|__ config/
-|   |__ config.php
-|     
-|__ database/
-|   |__ schema.sql
-|
-|__ README.md
-|__ docs/
+│
+├── public/
+│   ├── index.php
+│   ├── configure.php
+│   └── assets/
+│       ├── css/
+│       └── js/
+│
+├── src/
+│   ├── components/
+│   │   ├── core/
+│   │   │   ├── CPU.php
+│   │   │   ├── GPU.php
+│   │   │   ├── RAM.php
+│   │   │   ├── Motherboard.php
+│   │   │   └── PSU.php
+│   │   │
+│   │   ├── system/
+│   │   │   ├── Case.php
+│   │   │   ├── Cooling.php
+│   │   │   └── Fans.php
+│   │   │
+│   │   └── accessories/
+│   │       └── Cables.php
+│   │
+│   ├── configurator/
+│   │   ├── ConfiguratorService.php
+│   │   ├── CompatibilityService.php
+│   │   └── PricingService.php
+│   │
+│   ├── repository/
+│   │   ├── ComponentRepository.php
+│   │   └── RuleRepository.php
+│   │
+│   └── database/
+│       └── Database.php
+│
+├── config/
+│   └── config.php
+│
+├── database/
+│   └── schema.sql
+│
+├── README.md
+├── README_DE.md
+└── docs/
 
 
 ---
