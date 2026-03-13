@@ -24,7 +24,7 @@ Ziel des Projekts ist die Entwicklung einer wartbaren Architektur mit zentralisi
 ## Geplante Architektur
 Der Konfigurator wird in einer modularen Architektur aufgebaut:
 
-```text
+```
 root/
 │
 ├── public/
@@ -72,7 +72,7 @@ root/
 ├── README.md
 ├── README_DE.md
 └── docs/
-
+```
 
 ---
 

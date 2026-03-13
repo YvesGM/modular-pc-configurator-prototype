@@ -8,7 +8,7 @@ Ziel dieses Protokolls ist es, die Überlegungen hinter strukturellen Entscheidu
 
 ## Projektkontext
 Dieses Projekt wurde als Prototyp erstellt, um die Architektur eines modularen Hardware-Konfigurators zu untersuchen.
-Der Fokus dieses Prototyps liegt nicht darauf, einen bestehenden Produktions-Konfigurator exakt nachzubilden, sondern darauf, ein skalierbares und wartbares Systemdesign zu demonstrieren.
+Der Fokus dieses Prototyps liegt darauf, ein skalierbares und wartbares Systemdesign zu demonstrieren.
 
 Wichtige Architekturziele sind:
 - modulares Systemdesign
@@ -137,8 +137,8 @@ Repositories abstrahieren sämtliche Datenbankzugriffe.
 Anstatt SQL-Abfragen direkt in Services zu schreiben, stellen Repositories eine strukturierte Schnittstelle für den Zugriff auf gespeicherte Daten bereit.
 
 Geplante Repositories:
-- ComponentRepository
-- RuleRepository
+- `ComponentRepository`
+- `RuleRepository`
 
 Dieses Design stellt sicher, dass Datenbanklogik klar von der Geschäftslogik getrennt bleibt.
 
@@ -152,4 +152,168 @@ Die Datei `Database.php` wird später folgende Aufgaben übernehmen:
 - Laden der Konfiguration
 - Wiederverwendung bestehender Verbindungen
 
+--- 
+
+# Phase 3 – Datenbankdesign
+
+## Ziele
+In Phase 3 wurde das Datenmodell des Konfigurators entworfen und umgesetzt.
+Das Ziel bestand darin, ein **flexibles und erweiterbares Datenbankschema** zu entwickeln, das Hardwarekomponenten und deren Beziehungen zueinander abbilden kann.
+
+Anstatt für jede Komponentenart eigene Tabellenstrukturen zu definieren, verwendet das System ein **generisches Komponenten- und Attributmodell**.
+Dieser Ansatz ermöglicht es dem Konfigurator, neue Komponentenarten oder Hardwareeigenschaften zu unterstützen, ohne strukturelle Änderungen an der Datenbank durchführen zu müssen.
+
+---
+
+## Komponentenmodell
+Hardwarekomponenten werden zentral in der Tabelle `components` gespeichert.
+Jede Komponente ist einem `component_type` zugeordnet, der wiederum zu einer `component_category` gehört.
+Diese hierarchische Struktur ermöglicht es, Komponenten logisch zu gruppieren und gleichzeitig ein flexibles Datenmodell beizubehalten.
+
+Strukturübersicht:
+- `component_categories`
+    - `component_types`
+        - `components`
+
+Dieses Design ermöglicht es dem Konfigurator, die verfügbaren Komponenten für jeden Konfigurationsschritt dynamisch abzurufen.
+
+---
+
+## Attributsystem
+Um die große Vielfalt an Hardwareeigenschaften abzubilden, verwendet das System ein dynamisches Attributmodell.
+Anstatt Hardwareeigenschaften als feste Datenbankspalten zu definieren, werden Attribute in zwei Tabellen gespeichert:
+- attribute_definitions
+- component_attributes
+
+Die Tabelle `attribute_definitions` enthält die Liste aller unterstützten Hardwareattribute, zum Beispiel:
+- Socket
+- Speicher-Typ
+- GPU-Länge
+- Netzteil-Leistung
+- Mainboard-Formfaktor
+- Radiatorgröße
+
+Die Tabelle `component_attributes` speichert die tatsächlichen Attributwerte für jede Komponente.
+Dieser Ansatz erlaubt es, neue Hardwareattribute zu unterstützen, ohne das Datenbankschema ändern zu müssen.
+
+---
+
+## Kompatibilitätsregelsystem
+Ein zentrales Ziel des Konfigurators ist eine **zentralisierte Validierung der Hardwarekompatibilität**.
+Anstatt Kompatibilitätsprüfungen direkt im Anwendungscode zu implementieren, werden die Beziehungen zwischen Komponenten in der Datenbank gespeichert.
+
+Die Kompatibilitätsregeln befinden sich in der Tabelle:
+- `compatibility_rules`
+
+Jede Regel beschreibt eine Beziehung zwischen:
+- zwei Komponententypen
+- zwei Attributen
+- einer Vergleichslogik
+
+Beispiele für Regeltypen sind:
+- `equals`
+- `less_equal`
+- `greater_equal`
+
+Diese Struktur ermöglicht es dem Backend, Kompatibilität dynamisch auszuwerten.
+
+Beispiele für solche Regeln:
+- Der CPU-Sockel muss mit dem Sockel des Mainboards übereinstimmen
+- Die Länge der GPU darf die maximal unterstützte GPU-Länge des Gehäuses nicht überschreiten
+- Die Netzteilleistung muss mindestens der empfohlenen Leistung für die GPU entsprechen
+- Die RAM-Geschwindigkeit darf die vom Mainboard unterstützte maximale RAM-Geschwindigkeit nicht überschreiten
+
+Dieses regelbasierte System ermöglicht es dem Konfigurator, flexibel zu bleiben und gleichzeitig die Hardwarevalidierung zentral zu steuern.
+
+---
+
+## Vorbereitung des Preismodells
+Obwohl die Preisberechnung erst später im Backend implementiert wird, wurde das Datenmodell für die Preislogik bereits in Phase 3 vorbereitet.
+
+Dafür wurden folgende Tabellen eingeführt:
+- `currencies`
+- `tax_classes`
+- `tax_rates`
+- `promotions`
+- `promotion_components`
+
+Diese Struktur ermöglicht es dem System, Konfigurationspreise dynamisch zu berechnen, basierend auf:
+- dem Grundpreis der Komponenten
+- Steuerregeln
+- aktiven Aktionen oder Rabatten
+
+Das Preismodell ist bewusst von der Kompatibilitätslogik getrennt, um eine klare Trennung der Verantwortlichkeiten im System zu gewährleisten.
+
+---
+
+# Phase 4 - Basic Backend Implementation
+
+## Objectives
+Phase 4 dient der Vorbereitung der technischen Grundlage für die spätere Implementierung der Backend-Logik des Konfigurators.
+Der Fokus dieser Phase liegt **nicht auf der Implementierung von Anwendungscode**, sondern auf der Vorbereitung der strukturellen Komponenten, die später die Interaktion zwischen Backend und Datenbank ermöglichen.
+Ziel dieser Phase ist es, sicherzustellen, dass das Projekt schnell initialisiert werden kann und die notwendige Infrastruktur für die weitere Entwicklung bereits definiert ist.
+
+---
+
+## Vorbereitung der Projektstruktur
+In dieser Phase wurde die Backend-Ordnerstruktur vorbereitet, um verschiedene Verantwortungsbereiche des Systems klar voneinander zu trennen.
+
+Die Projektstruktur führt dedizierte Module für folgende Bereiche ein:
+- Datenbankzugriff
+- Repositories
+- Konfigurator-Services
+- Komponentenstrukturen
+
+Folgende zentrale Backendmodule wurden definiert:
+- `database`
+- `repository`
+- `configurator`
+- `components`
+
+Diese Module werden in späteren Entwicklungsphasen die eigentliche Backend-Logik enthalten.
+Zum aktuellen Zeitpunkt dienen die Dateien jedoch hauptsächlich als strukturelle Platzhalter für die kommende Implementierung.
+
+---
+
+## Datenbank-Initialisierungssystem
+Um die Einrichtung des Projekts zu vereinfachen, wurde die Datenbankstruktur als modularer SQL-Datensatz organisiert.
+Das Verzeichnis `database/` enthält das vollständige Schema sowie alle notwendigen Datensätze zur Initialisierung der Konfigurator-Datenbank.
+Dadurch kann die Backend-Umgebung innerhalb weniger Sekunden erstellt werden, indem die bereitgestellten SQL-Dateien importiert werden.
+
+Der Datensatz umfasst unter anderem:
+- das vollständige Datenbankschema
+- Komponenten-Kategorien
+- Komponenten-Typen
+- Attributdefinitionen
+- Hardwarekomponenten
+- Kompatibilitätsregeln
+- Preisstrukturen
+
+Dieser Ansatz stellt sicher, dass jeder Entwickler oder Betrachter des Projekts jederzeit eine identische Testumgebung reproduzieren kann.
+
+## Fokus
+Es ist wichtig zu betonen, dass sich diese Phase ausschließlich auf die Vorbereitung der Entwicklungsumgebung und der Datenbankbasis konzentriert.
+Es wurde **noch keine Backend-Logik implementiert**.
+
+Insbesondere fehlen aktuell noch folgende Elemente:
+- Implementierung der Datenbankverbindung
+- Repository-Logik
+- Kompatibilitätsprüfungs-Engine
+- Konfigurator-Workflow-Logik
+- Preisberechnungslogik
+
+Diese Komponenten werden in den folgenden Entwicklungsphasen umgesetzt.
+
+--- 
+
+## Ergebnis von Phase 4
+Am Ende von Phase 4 verfügt das Projekt über:
+- ein vollständiges Datenbankschema
+- einen vollständig befüllten Testdatensatz
+- eine vorbereitete Backend-Projektstruktur
+- klar definierte Architekturmodule
+
+Diese Grundlage ermöglicht den Übergang in die nächste Entwicklungsphase, in der die eigentliche Konfiguratorlogik implementiert wird.
+
+---
 

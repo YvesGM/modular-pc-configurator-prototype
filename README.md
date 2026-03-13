@@ -23,7 +23,7 @@ The Goal is to design a maintainable architecture with centralized compatibility
 ## Planned Architecture
 The configurator will be structured in a modular architecture:
 
-```text
+```
 root/
 │
 ├── public/
@@ -71,6 +71,7 @@ root/
 ├── README.md
 ├── README_DE.md
 └── docs/
+```
 
 
 ---

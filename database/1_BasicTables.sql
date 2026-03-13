@@ -119,7 +119,7 @@ CREATE TABLE
         component_type_b INT NOT NULL,
         attribute_a INT NOT NULL,
         attribute_b INT NOT NULL,
-        rule_type VARCHAR(255) NOT NULL,
+        rule_type ENUM('equals','less_equal','greater_equal') NOT NULL,
         description TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
