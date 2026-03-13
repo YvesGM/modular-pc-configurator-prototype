@@ -1,0 +1,40 @@
+INSERT INTO
+    attribute_definitions (attribute_name, attribute_unit)
+VALUES
+-- CPU
+    ('socket', NULL),
+    ('cores', NULL),
+    ('core_clock', 'MHz'),
+    ('cache_size', 'MB'),
+    ('tdp', 'W'),
+-- Memory
+    ('memory_type', NULL),
+    ('memory_support', NULL),
+    ('memory_size', 'GB'),
+    ('capacity', NULL),
+    ('speed', 'MHz'),
+-- Motherboard
+    ('chipset', NULL),
+    ('form_factor', NULL),
+-- PSU
+    ('wattage', 'W'),
+    ('efficiency_rating', NULL),
+    ('modularity', NULL),
+-- Cooling
+    ('cooling_type', NULL),
+    ('fan_size', 'mm'),
+    ('number_of_fans', NULL),
+    ('radiator_size', 'mm'),
+    ('pump_speed', 'RPM'),
+    ('rpm', 'RPM'),
+    ('noise_level', 'dB(A)'),
+    ('heatsink_material', NULL),
+-- Storage
+    ('interface', NULL),
+    ('read_speed', 'MB/s'),
+    ('write_speed', 'MB/s'),
+-- Physical 
+    ('material', NULL),
+    ('weight', 'kg'),
+    ('dimensions', 'mm'),
+    ('rgb_lighting', NULL);
