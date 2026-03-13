@@ -1,40 +1,117 @@
 INSERT INTO
     attribute_definitions (attribute_name, attribute_unit)
 VALUES
--- CPU
+    -- CPU #1-#7
     ('socket', NULL),
+    ('socket_support', NULL),
     ('cores', NULL),
     ('core_clock', 'MHz'),
     ('cache_size', 'MB'),
     ('tdp', 'W'),
--- Memory
+    ('max_memory_speed', 'MHz'),
+    -- GPU #8-#14
+    ('gpu_memory_type', NULL),
+    ('gpu_memory', 'GB'),
+    ('gpu_clock', NULL),
+    ('gpu_length', 'mm'),
+    ('gpu_power_connector', NULL),
+    ('gpu_slot_width', 'mm'),
+    ('gpu_power_draw_recommended_psu', 'W'),
+    -- Memory #15-#20
     ('memory_type', NULL),
-    ('memory_support', NULL),
+    ('memory_channels', NULL),
+    ('memory_form_factor', NULL),
     ('memory_size', 'GB'),
-    ('capacity', NULL),
+    ('modules', NULL),
     ('speed', 'MHz'),
--- Motherboard
+    -- Motherboard #21-#34
     ('chipset', NULL),
-    ('form_factor', NULL),
--- PSU
+    ('ram_slots', NULL),
+    ('ram_max_speed', 'MHz'),
+    ('max_memory', 'GB'),
+    ('m2_slots', NULL),
+    ('sata_ports', NULL),
+    ('pcie_x16_slots', NULL),
+    ('pcie_version', NULL),
+    ('ethernet_speed', 'Gbps'),
+    ('wifi', NULL),
+    ('motherboard_form_factor', NULL),
+    ('rgb_header_type', NULL),
+    ('fan_header_type', NULL),
+    ('fan_header_count', NULL),
+    -- Case #35-#42
+    ('case_type', NULL),
+    ('supported_motherboard_sizes', NULL),
+    ('max_gpu_length', 'mm'),
+    ('max_cooler_height', 'mm'),
+    ('max_radiator_sizes', 'mm'),
+    ('radiator_mount_positions', NULL),
+    ('psu_support', NULL),
+    ('drive_bays', NULL),
+    -- PSU #43-#46
     ('wattage', 'W'),
     ('efficiency_rating', NULL),
     ('modularity', NULL),
--- Cooling
+    ('psu_form_factor', NULL),
+    -- Cooling #47-#55
     ('cooling_type', NULL),
-    ('fan_size', 'mm'),
+    ('cooler_height', 'mm'),
     ('number_of_fans', NULL),
+    ('fan_size', 'mm'),
+    ('rpm', 'RPM'),
     ('radiator_size', 'mm'),
     ('pump_speed', 'RPM'),
-    ('rpm', 'RPM'),
     ('noise_level', 'dB(A)'),
     ('heatsink_material', NULL),
--- Storage
+    -- Storage #56-#60
+    ('capacity', NULL),
     ('interface', NULL),
     ('read_speed', 'MB/s'),
     ('write_speed', 'MB/s'),
--- Physical 
+    ('storage_form_factor', NULL),
+    -- Physical #61-#66
     ('material', NULL),
     ('weight', 'kg'),
     ('dimensions', 'mm'),
-    ('rgb_lighting', NULL);
+    ('rgb_lighting', NULL),
+    ('rgb_connector', NULL),
+    ('fan_connector', NULL),
+    -- Monitors #67-#75
+    ('screen_size', 'inch'),
+    ('resolution', NULL),
+    ('refresh_rate', 'Hz'),
+    ('panel_type', NULL),
+    ('response_time', 'ms'),
+    ('display_connector', NULL),
+    ('aspect_ratio', NULL),
+    ('curved', NULL),
+    ('adaptive_sync', NULL),
+    -- Keyboards #76-#79
+    ('keyboard_switch_type', NULL),
+    ('keyboard_layout', NULL),
+    ('keyboard_connection', NULL),
+    ('keyboard_backlight_type', NULL),
+    -- Mices #80-#84
+    ('mouse_sensor_type', NULL),
+    ('mouse_dpi', 'DPI'),
+    ('mouse_buttons', NULL),
+    ('mouse_connection', NULL),
+    ('mouse_weight_adjustable', NULL),
+    -- OS #85-#89
+    ('os_family', NULL),
+    ('os_version', NULL),
+    ('os_architecture', NULL),
+    ('license_type', NULL),
+    ('supported_platform', NULL),
+    -- Driver #90-#94
+    ('driver_type', NULL),
+    ('driver_version', NULL),
+    ('supported_os', NULL),
+    ('supported_architecture', NULL),
+    ('driver_interface', NULL),
+    -- Utilities #95-#97
+    ('utility_type', NULL),
+    ('utility_category', NULL),
+    ('developer', NULL),
+    -- Testing #98
+    ('test_brand', NULL);

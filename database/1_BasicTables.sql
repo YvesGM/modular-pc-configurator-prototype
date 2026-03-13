@@ -1,35 +1,34 @@
 -- Phase 3 - Database Schema
-
 -- Pricing-Details
-CREATE TABLE 
+CREATE TABLE
     currencies (
         id INT AUTO_INCREMENT PRIMARY KEY,
         code VARCHAR(3) NOT NULL,
         symbol VARCHAR(5),
         name VARCHAR(50),
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAM
-);
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
 
-CREATE TABLE 
+CREATE TABLE
     tax_classes (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(100) NOT NULL,
         description TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+    );
 
-CREATE TABLE 
+CREATE TABLE
     tax_rates (
         id INT AUTO_INCREMENT PRIMARY KEY,
         tax_class_id INT NOT NULL,
         country_code VARCHAR(2) NOT NULL,
-        rate DECIMAL(5,2) NOT NULL,
+        rate DECIMAL(5, 2) NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (tax_class_id) REFERENCES tax_classes(id) ON DELETE CASCADE ON UPDATE CASCADE
-);
+        FOREIGN KEY (tax_class_id) REFERENCES tax_classes (id) ON DELETE CASCADE ON UPDATE CASCADE
+    );
 
 -- Components
 CREATE TABLE
@@ -67,7 +66,7 @@ CREATE TABLE
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (type_id) REFERENCES component_types (id) ON DELETE CASCADE ON UPDATE CASCADE,
         FOREIGN KEY (currency_id) REFERENCES currencies (id) ON DELETE RESTRICT ON UPDATE CASCADE,
-        FOREIGN KEY (tax_class_id) REFERENCES tax_classes(id) ON DELETE RESTRICT ON UPDATE CASCADE;
+        FOREIGN KEY (tax_class_id) REFERENCES tax_classes (id) ON DELETE RESTRICT ON UPDATE CASCADE
     );
 
 CREATE TABLE
@@ -92,25 +91,25 @@ CREATE TABLE
     );
 
 -- Discounts
-CREATE TABLE 
+CREATE TABLE
     promotions (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255),
         discount_type VARCHAR(50),
-        discount_value DECIMAL(10,2),
+        discount_value DECIMAL(10, 2),
         start_date DATETIME,
         end_date DATETIME,
         active BOOLEAN DEFAULT TRUE
-);
+    );
 
-CREATE TABLE 
+CREATE TABLE
     promotion_components (
         id INT AUTO_INCREMENT PRIMARY KEY,
         promotion_id INT,
         component_id INT,
-        FOREIGN KEY (promotion_id) REFERENCES promotions(id) ON DELETE CASCADE,
-        FOREIGN KEY (component_id) REFERENCES components(id) ON DELETE CASCADE
-);
+        FOREIGN KEY (promotion_id) REFERENCES promotions (id) ON DELETE CASCADE,
+        FOREIGN KEY (component_id) REFERENCES components (id) ON DELETE CASCADE
+    );
 
 -- Compatibility Rules
 CREATE TABLE
@@ -118,10 +117,9 @@ CREATE TABLE
         id INT AUTO_INCREMENT PRIMARY KEY,
         component_type_a INT NOT NULL,
         component_type_b INT NOT NULL,
-        attribute_a INT NOT NULL(255),
-        attribute_b INT NOT NULL(255),
+        attribute_a INT NOT NULL,
+        attribute_b INT NOT NULL,
         rule_type VARCHAR(255) NOT NULL,
-        rule_description TEXT,
         description TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
