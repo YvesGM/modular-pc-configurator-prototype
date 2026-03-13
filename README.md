@@ -66,11 +66,25 @@ root/
 │   └── config.php
 │
 ├── database/
-│   └── schema.sql
+│   ├── 1_BasicTables.sql
+│   │
+│   ├── 2_components/
+│   │   ├── 2_1_CategoryDatasets.sql
+│   │   └── 2_2_types/
+│   │       ├── 2_2_0_ImportFile.sql
+│   │       └── 2_3_specific_components/
+│   │           └── 2_3_0_ImportFile.sql
+│   │
+│   └── 3_compatibility/
+│       ├── RulesEqual.sql
+│       ├── RulesGreater.sql
+│       └── RulesLess.sql
 │
 ├── README.md
 ├── README_DE.md
 └── docs/
+    ├── DevelopmentLogsEN.md
+    └── DevelopmentLogsDE.md
 ```
 
 
