@@ -316,3 +316,96 @@ At the end of Phase 4 the project provides:
 This foundation enables the next phase of development, where the actual configurator logic will be implemented.
 
 ---
+
+# Phase 5 – Backend Interaction Design
+
+## Objectives
+Phase 5 focuses on defining the **runtime interaction flow between frontend requests, backend services, and the database layer**.
+
+While previous phases established the structural architecture and database model, this phase defines **how data will move through the system during runtime**.
+
+The goal is to ensure that the configurator backend:
+- minimizes unnecessary database queries
+- centralizes business logic in the service layer
+- maintains a clear separation between presentation, logic, and data access
+
+## Request Flow Architecture
+The configurator backend follows a **structured request processing flow**.
+Frontend requests are first received by the controller layer, which acts as the entry point for the backend application.
+The controller coordinates communication between the frontend and the internal backend modules.
+
+General request flow:
+
+```
+  Frontend Request
+       ↓
+   Controller
+       ↓
+  Service Layer
+       ↓
+ Repository Layer
+       ↓
+    Database
+```
+
+The processed result then travels back through the same layers until it is returned to the frontend.
+
+## Controller Layer
+Controllers act as the **entry point for frontend requests**.
+
+Responsibilities include:
+- receiving frontend requests
+- triggering appropriate service methods
+- preparing structured responses for the frontend
+
+Controllers do **not contain busines logic**.
+Their purpose is strictly orchestration.
+
+## Service Layer
+The service layer contains the **core business logic of the configurator**.
+Services coordinate multiple repositories and component definitons in order to produce valid configuration results.
+
+Examples of responsibilities include:
+- evaluating compatibility rules
+- filtering available components
+- validating selected configurations
+- preparing pricing calculations
+
+The service layer acts as the **central decision engine** of the configurator.
+
+## Repository Layer
+Repositories provides **structured access to database data**.
+
+Instead of executing database querries repeadly during every request, repositories allow data to be:
+- retrieved once
+- stored temporarily in memory
+- reused accross multiple service calls
+
+This approach reduces database load and improves runtime performance.
+
+Repositories are responsible for:
+- loading components
+- retrieving compatibility rules 
+- accessing attribute definitions
+- providing structured data acces to services
+
+## Data Caching Strategy
+To minimize unnessecary database access, repositories may cache frequently accessed data during runtime.
+
+Example include:
+- component lists
+- attribute definitions
+- compatibility rules
+
+Once loaded, these datasets can be reused by the service layer without requiring addtitional database querries.
+
+Database requests are therefore only executed **when new data must be retrieved**.
+
+## Result of Phase 5 
+At the end of Phase 5 the project provides:
+- a definied runtime request flow
+- a structured backend interaction model
+- separation between controllers, services, repositories and database
+- a foundation for implementing the compatibility engine and pricing logic
+
+This architecture prepares the system for the next development phase, where the **actual configurator logic and compatibility evaluations engine will be implemented**.

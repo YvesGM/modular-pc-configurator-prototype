@@ -317,3 +317,110 @@ Diese Grundlage ermöglicht den Übergang in die nächste Entwicklungsphase, in 
 
 ---
 
+# Phase 5 – Backend-Interaktionsdesign
+
+## Ziele
+Phase 5 konzentriert sich auf die Definition des **Runtime-Interaktionsflusses zwischen Frontend-Anfragen, Backend-Services und der Datenbankschicht**.
+
+Während frühere Phasen die Projektstruktur und das Datenbankmodell etablierten, definiert diese Phase **wie Daten während der Laufzeit durch das System fließen**.
+
+Das Ziel ist sicherzustellen, dass das Backend des Konfigurators:
+- unnötige Datenbankabfragen minimiert
+- Geschäftslogik in der Service-Schicht zentralisiert
+- eine klare Trennung zwischen Präsentation, Logik und Datenzugriff beibehält
+
+---
+
+## Request Flow Architecture
+Der Konfigurator-Backend folgt einem **strukturierten Request-Processing-Fluss**.
+Frontend-Anfragen werden zunächst von der Controller-Schicht empfangen, die als Einstiegspunkt für die Backend-Anwendung fungiert.
+Der Controller koordiniert die Kommunikation zwischen dem Frontend und den internen Backend-Modulen.
+
+Allgemeiner Request-Fluss:
+
+```
+  Frontend-Anfrage
+       ↓
+   Controller
+       ↓
+  Service-Schicht
+       ↓
+ Repository-Schicht
+       ↓
+    Datenbank
+```
+
+Das verarbeitete Ergebnis reist dann durch die gleichen Schichten zurück, bis es zum Frontend zurückgegeben wird.
+
+---
+
+## Controller-Schicht
+Controller fungieren als **Einstiegspunkt für Frontend-Anfragen**.
+
+Aufgaben:
+- Frontend-Anfragen empfangen
+- geeignete Service-Methoden auslösen
+- strukturierte Antworten für das Frontend vorbereiten
+
+Controller enthalten **keine Geschäftslogik**.
+Ihr Zweck ist rein Orchestrierung.
+
+---
+
+## Service-Schicht
+Die Service-Schicht enthält die **zentrale Geschäftslogik des Konfigurators**.
+Services koordinieren mehrere Repositories und Komponentendefinitionen, um gültige Konfigurationsergebnisse zu produzieren.
+
+Beispiele für Aufgaben:
+- Bewertung von Kompatibilitätsregeln
+- Filterung verfügbarer Komponenten
+- Validierung ausgewählter Konfigurationen
+- Vorbereitung von Preisberechnungen
+
+Die Service-Schicht fungiert als die **zentrale Entscheidungsmaschine** des Konfigurators.
+
+---
+
+## Repository-Schicht
+Repositories bieten **strukturierten Zugriff auf Datenbankdaten**.
+
+Anstatt Datenbankabfragen bei jeder Anfrage wiederholt auszuführen, erlauben Repositories Daten zu:
+- einmal abrufen
+- vorübergehend im Speicher speichern
+- über mehrere Service-Aufrufe hinweg wiederzuverwenden
+
+Dieser Ansatz reduziert die Datenbankbelastung und verbessert die Laufzeitleistung.
+
+Repositories sind verantwortlich für:
+- Laden von Komponenten
+- Abrufen von Kompatibilitätsregeln
+- Zugriff auf Attributdefinitionen
+- Bereitstellung strukturierter Datenzugriff für Services
+
+---
+
+## Daten-Caching-Strategie
+Um unnötige Datenbankzugriffe zu minimieren, können Repositories häufig verwendete Daten während der Laufzeit zwischenspeichern.
+
+Beispiele umfassen:
+- Komponentenlisten
+- Attributdefinitionen
+- Kompatibilitätsregeln
+
+Einmal geladen, können diese Datensätze von der Service-Schicht wiederverwendet werden, ohne zusätzliche Datenbankabfragen zu erfordern.
+
+Datenbankabfragen werden daher nur ausgeführt, **wenn neue Daten abgerufen werden müssen**.
+
+---
+
+## Ergebnis von Phase 5
+Am Ende von Phase 5 bietet das Projekt:
+- einen definierten Runtime-Request-Fluss
+- ein strukturiertes Backend-Interaktionsmodell
+- Trennung zwischen Controllern, Services, Repositories und Datenbank
+- eine Grundlage für die Implementierung der Kompatibilitäts-Engine und Preislogik
+
+Diese Architektur bereitet das System für die nächste Entwicklungsphase vor, in der die **aktuelle Konfigurator-Logik und die Kompatibilitäts-Evaluierungs-Engine implementiert werden**.
+
+---
+

@@ -1,4 +1,5 @@
 ⚠️ This project is a prototype for demonstrating configurator architecture and compatibility logic.
+
 # Modular PC Configurator Prototype
 
 ## Overview
@@ -98,7 +99,7 @@ root/
 - centralized compatibility logic
 - dynamic price calculation
 - long-term maintainability
-- clear seperation of data, logic and user interface (UI)
+- clear separation of data, logic and user interface (UI)
 
 ---
 
@@ -146,17 +147,20 @@ root/
 - design compatibility-rules
 - planing of price model
 
-### Phase 4 - Basic Backend
+### Phase 4 - Backend Foundation
 - set project structure
-- set connection to database
-- prepare data-access & repositiories
-- set first datasets
+- implement centralized database connection
+- prepare repository architecture
+- prepare backend modules
+- initialize example database dataset
 
 ### Phase 5 - Configurator-Logic
-- load components
-- test compatibility
-- test limits
-- calculate price
+- implement component repositories
+- load components and attributes from database
+- implement compatibility evaluation engine
+- validate configuration constraints
+- filter compatible components dynamically
+- implement pricing calculation
 
 ### Phase 6 - UI / User-flow
 - Landingpage

@@ -25,7 +25,6 @@ Ziel des Projekts ist die Entwicklung einer wartbaren Architektur mit zentralisi
 Der Konfigurator wird in einer modularen Architektur aufgebaut:
 
 ```
-```
 root/
 │
 ├── public/
@@ -74,11 +73,11 @@ root/
 │   ├── 1_BasicTables.sql
 │   │
 │   ├── 2_components/
-│   │   ├── 2_1_CategoryDatasets.sql
-│   │   └── 2_2_types/
-│   │       ├── 2_2_0_ImportFile.sql
-│   │       └── 2_3_specific_components/
-│   │           └── 2_3_0_ImportFile.sql
+│   │   ├── 21_CategoryDatasets.sql
+│   │   └── 22-types/
+│   │       ├── 220_ImportFile.sql
+│   │       └── 23-specific-components/
+│   │           └── 230_ImportFile.sql
 │   │
 │   └── 3_compatibility/
 │       ├── RulesEqual.sql
@@ -148,24 +147,28 @@ root/
 - Planung des Preismodells
 
 ### Phase 4 – Backend-Grundlagen
-- Verbindung zur Datenbank herstellen
-- Datenzugriff und Repositories vorbereiten
-- erste Datensätze erstellen
+- Projektstruktur einrichten
+- zentralisierte Datenbankverbindung implementieren
+- Repository-Architektur vorbereiten
+- Backend-Module vorbereiten
+- Beispiel-Datenbankdatensatz initialisieren
 
 ### Phase 5 – Konfigurator-Logik
-- Komponenten laden
-- Kompatibilität prüfen
-- Systemlimits überprüfen
-- Preis berechnen
+- Komponenten-Repositories implementieren
+- Komponenten und Attribute aus der Datenbank laden
+- Kompatibilitäts-Evaluierungs-Engine implementieren
+- Konfigurationsbeschränkungen validieren
+- kompatible Komponenten dynamisch filtern
+- Preisberechnung implementieren
 
 ### Phase 6 – UI / Benutzerfluss
 - Landingpage
-- Auswahl zwischen Simple und Advanced Mode
+- Auswahl zwischen einfachem und erweitertem Modus
 - Konfigurator-Seite
-- Fehler- und Hinweislogik
+- Fehler- und Nachrichtenbehandlung
 - Ergebnis- / Übersichtsbereich
 
 ### Phase 7 – Refactoring & Dokumentation
 - Namenskonventionen vereinheitlichen
 - Logik zentralisieren
-- mögliche Erweiterungen dokumentieren
+- mögliche Erweiterungen dokumentieren und berücksichtigen
