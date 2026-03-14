@@ -34,21 +34,22 @@ root/
 │       └── js/
 │
 ├── src/
+│   │
+│   ├── controller/
+│   │   └── ConfiguratorController.php
+│   │
 │   ├── components/
 │   │   ├── core/
-│   │   │   ├── CPU.php
-│   │   │   ├── GPU.php
-│   │   │   ├── RAM.php
-│   │   │   ├── Motherboard.php
-│   │   │   └── PSU.php
-│   │   │
 │   │   ├── system/
-│   │   │   ├── Case.php
-│   │   │   ├── Cooling.php
-│   │   │   └── Fans.php
-│   │   │
-│   │   └── accessories/
-│   │       └── Cables.php
+│   │   ├── cooling/
+│   │   ├── storage/
+│   │   ├── power-delivery/
+│   │   ├── networking/
+│   │   ├── accessories/
+│   │   ├── expansion/
+│   │   ├── peripherals/
+│   │   ├── software/
+│   │   └── testing/
 │   │
 │   ├── configurator/
 │   │   ├── ConfiguratorService.php
@@ -57,23 +58,25 @@ root/
 │   │
 │   ├── repository/
 │   │   ├── ComponentRepository.php
-│   │   └── RuleRepository.php
+│   │   ├── CompatibilityRepository.php
+│   │   └── PricingRepository.php
 │   │
 │   └── database/
-│       └── Database.php
-│
+│       └── Connection.php
+│           
 ├── config/
-│   └── config.php
-│
-├── database/
+│   └── db-config/
+│       └── DatabaseList.php
+│   
+├── database-example/
 │   ├── 1_BasicTables.sql
 │   │
 │   ├── 2_components/
-│   │   ├── 2_1_CategoryDatasets.sql
-│   │   └── 2_2_types/
-│   │       ├── 2_2_0_ImportFile.sql
-│   │       └── 2_3_specific_components/
-│   │           └── 2_3_0_ImportFile.sql
+│   │   ├── 21_CategoryDatasets.sql
+│   │   └── 22-types/
+│   │       ├── 220_ImportFile.sql
+│   │       └── 23-specific-components/
+│   │           └── 230_ImportFile.sql
 │   │
 │   └── 3_compatibility/
 │       ├── RulesEqual.sql
