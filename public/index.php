@@ -16,13 +16,9 @@
     require_once __DIR__ . '/../src/database/Connection.php';
 
     $pcConfDB = Database::getConnection('pcConfigurator');
-    $testDB = Database::getConnection('testDatabase');
 
     if ($pcConfDB instanceof PDO) {
         echo "pcConfigurator Database connected successfully <br>";
-    }
-    if ($testDB instanceof PDO) {
-        echo "testDatabase Database connected successfully";
     }
     ?>
 
