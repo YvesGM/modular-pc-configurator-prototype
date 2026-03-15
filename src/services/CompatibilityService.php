@@ -1,62 +1,63 @@
 <?php
 
-require_once __DIR__ . '/../repositories/compatibility/CompatibilityRepository.php';
-require_once __DIR__ . '/ComponentService.php';
-class CompatibilityService
+require_once __DIR__ . '/../repositories/ConfiguratorRepository.php';
+require_once __DIR__ . '/ComponentsService.php';
+
+class CompatibilityService extends ConfiguratorRepository
 {
-    private CompatibilityRepository $compatibilityRepository;
-    private ComponentService $componentService;
+    private ComponentsService $componentsService;
+
     public function __construct()
     {
-        $this->compatibilityRepository = new CompatibilityRepository();
-        $this->componentService = new ComponentService();
+        parent::__construct();
+        $this->componentsService = new ComponentsService();
     }
 
     public function validateComponents(int $componentAId, int $componentBId): array
     {
-        $componentA = $this->componentService->getComponentWithAttributes($componentAId);
-        $componentB = $this->componentService->getComponentWithAttributes($componentBId);
+        $compAId = $this->componentsService->getComponentWithAttributes($componentAId);
+        $compBId = $this->componentsService->getComponentWithAttributes($componentBId);
 
-        $ctypeA = $componentA['component_type'];
-        $ctypeB = $componentB['component_type'];
+        $ctypeA = $compAId['component_type'];
+        $ctypeB = $compBId['component_type'];
     
 
-        $rulesBetweenCTypes = $this->compatibilityRepository->getRulesBetweenComponentTypes($ctypeA, $ctypeB);
+        $rulesBetweenTypes = $this->compatibilityRepository->getRulesBetweenComponentTypes($ctypeA, $ctypeB);
 
-        $results = [];
+        $validated = [];
 
-        foreach ($rulesBetweenCTypes as $cTypeRule) {
+        foreach ($rulesBetweenTypes as $TypeRule) {
 
-            if ($cTypeRule['type_a_name'] == $componentA['component_type']) {
+            if ($TypeRule['type_a_name'] == $compAId['component_type']) {
 
-                $valueA = $componentA['attributes'][$cTypeRule['attribute_a']] ?? null;
-                $valueB = $componentB['attributes'][$cTypeRule['attribute_b']] ?? null;
+                $valueA = $compAId['attributes'][$TypeRule['attribute_a_name']] ?? null;
+                $valueB = $compBId['attributes'][$TypeRule['attribute_b_name']] ?? null;
 
             } else {
 
-                $valueA = $componentB['attributes'][$cTypeRule['attribute_a']] ?? null;
-                $valueB = $componentA['attributes'][$cTypeRule['attribute_b']] ?? null;
+                $valueA = $compBId['attributes'][$TypeRule['attribute_a_name']] ?? null;
+                $valueB = $compAId['attributes'][$TypeRule['attribute_b_name']] ?? null;
 
             };
 
             $passed = $this->evaluateRule(
-                $cTypeRule['rule_type'],
+                $TypeRule['rule_type'],
                 $valueA,
                 $valueB
-            );
+                );
 
-            $results[] = [
-                'rule_id' => $cTypeRule['id'],
-                'description' => $cTypeRule['description'],
+            $validated[] = [
+                'rule_id' => $TypeRule['id'],
+                'description' => $TypeRule['description'],
                 'value_a' => $valueA,
                 'value_b' => $valueB,
-                'passed' => $passed
+                'passed' => $passed ? true : false
             ];
         }
 
         return [
-            'is_compatible' => !in_array(false, array_column($results, 'passed')),
-            'rules_checked' => $results
+            'is_compatible' => !in_array(false, array_column($validated, 'passed'), true),
+            'rules_checked' => $validated
         ];
     }
 

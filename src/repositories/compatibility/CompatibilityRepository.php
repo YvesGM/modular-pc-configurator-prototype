@@ -1,76 +1,129 @@
 <?php
 
-require_once __DIR__ . '/../ConfiguratorRepository.php';
+require_once __DIR__ . '/../DatabaseRepoConnections.php';
 
-class CompatibilityRepository extends ConfiguratorRepository
+class CompatibilityRepository extends DatabaseRepoConnections
 {
     // Get All Compatibility Rules
     public function getAllRules(): array
     {
         $allCompatibilityRules = $this->CONFIGURATOR_DB->query("
-            SELECT *
-            FROM compatibility_rules
+            SELECT 
+                cr.id,
+                cr.description,
+                ctA.name AS type_a_name,
+                ctB.name AS type_b_name,
+                cr.component_type_a AS type_a_id,
+                cr.component_type_b AS type_b_id,
+                adA.attribute_name AS attribute_a_name,
+                adB.attribute_name AS attribute_b_name,
+                cr.attribute_a AS attribute_a_id,
+                cr.attribute_b AS attribute_b_id,
+                cr.rule_type,
+                cr.created_at,
+                cr.updated_at
+            FROM compatibility_rules cr
+            JOIN component_types ctA ON cr.component_type_a = ctA.id
+            JOIN component_types ctB ON cr.component_type_b = ctB.id
+            JOIN attribute_definitions adA ON cr.attribute_a = adA.id
+            JOIN attribute_definitions adB ON cr.attribute_b = adB.id
         ");
 
         return $allCompatibilityRules->fetchAll();
     }
 
-    public function getRulesForComponentType(string $componentType): array
+    public function getRulesForComponentType(string $componentTypeName): array
     {
         $selectedRules = $this->CONFIGURATOR_DB->prepare("
-            SELECT cr.*
-            FROM compatibility_rules cr
-            JOIN component_types ctA ON cr.component_type_a = ctA.id
-            JOIN component_types ctB ON cr.component_type_b = ctB.id
-            WHERE ctA.name = :typeA
-               OR ctB.name = :typeB
-        ");
-
-        $this->bindAndExecute($selectedRules, [
-            ':typeA' => $componentType,
-            ':typeB' => $componentType
-        ]);
-
-        return $selectedRules->fetchAll();
-    }
-
-    public function getRulesBetweenComponentTypes(string $typeA, string $typeB): array
-    {
-        $typeAId = $this->getTypeId($typeA);
-        $typeBId = $this->getTypeId($typeB);
-
-        $selectedRules = $this->CONFIGURATOR_DB->prepare("
-                SELECT
+            SELECT 
                 cr.id,
-                cr.component_type_a,
-                cr.component_type_b,
+                cr.description,
                 ctA.name AS type_a_name,
                 ctB.name AS type_b_name,
-                adA.attribute_name AS attribute_a,
-                adB.attribute_name AS attribute_b,
+                cr.component_type_a AS type_a_id,
+                cr.component_type_b AS type_b_id,
+                adA.attribute_name AS attribute_a_name,
+                adB.attribute_name AS attribute_b_name,
+                cr.attribute_a AS attribute_a_id,
+                cr.attribute_b AS attribute_b_id,
                 cr.rule_type,
-                cr.description
+                cr.created_at,
+                cr.updated_at
             FROM compatibility_rules cr
             JOIN component_types ctA ON cr.component_type_a = ctA.id
             JOIN component_types ctB ON cr.component_type_b = ctB.id
-            JOIN attribute_definitions adA 
-                ON cr.attribute_a = adA.id
-            JOIN attribute_definitions adB 
-                ON cr.attribute_b = adB.id
-            WHERE 
-                (cr.component_type_a = :typeA1 AND cr.component_type_b = :typeB1)
-            OR
-                (cr.component_type_a = :typeB2 AND cr.component_type_b = :typeA2)
+            JOIN attribute_definitions adA ON cr.attribute_a = adA.id
+            JOIN attribute_definitions adB ON cr.attribute_b = adB.id
+            WHERE ctA.name = :typeNameA
+               OR ctB.name = :typeNameB
         ");
 
         $this->bindAndExecute($selectedRules, [
-            ':typeA1' => $typeAId,
-            ':typeB1' => $typeBId,
-            ':typeB2' => $typeBId,
-            ':typeA2' => $typeAId
+            ':typeNameA' => $componentTypeName,
+            ':typeNameB' => $componentTypeName
         ]);
 
-        return $selectedRules->fetchAll();
+        $fetchedRules = $selectedRules->fetchAll();
+
+        if (empty($fetchedRules)) {
+            throw new Exception(
+                "(No rules for Component Type: [$componentTypeName] found!)"
+            );
+        }
+
+        return $fetchedRules;
+    }
+
+    public function getRulesBetweenComponentTypes(string $typeNameA, string $typeNameB): array
+    {
+        if (empty($typeNameA) || empty($typeNameB)) {
+            throw new Exception("(Both or one Type is not selected!)");
+        }
+
+        $typeAId = $this->getTypeId($typeNameA);
+        $typeBId = $this->getTypeId($typeNameB);
+
+        $selectedRules = $this->CONFIGURATOR_DB->prepare("
+            SELECT
+                cr.id,
+                cr.description,
+                ctA.name AS type_a_name,
+                ctB.name AS type_b_name,
+                cr.component_type_a AS type_a_id,
+                cr.component_type_b AS type_b_id,
+                adA.attribute_name AS attribute_a_name,
+                adB.attribute_name AS attribute_b_name,
+                cr.attribute_a AS attribute_a_id,
+                cr.attribute_b AS attribute_b_id,
+                cr.rule_type,
+                cr.created_at,
+                cr.updated_at
+            FROM compatibility_rules cr
+            JOIN component_types ctA ON cr.component_type_a = ctA.id
+            JOIN component_types ctB ON cr.component_type_b = ctB.id
+            JOIN attribute_definitions adA ON cr.attribute_a = adA.id
+            JOIN attribute_definitions adB ON cr.attribute_b = adB.id
+            WHERE 
+                (cr.component_type_a = :typeIdA1 AND cr.component_type_b = :typeIdB1)
+            OR
+                (cr.component_type_a = :typeIdB2 AND cr.component_type_b = :typeIdA2)
+        ");
+
+        $this->bindAndExecute($selectedRules, [
+            ':typeIdA1' => $typeAId,
+            ':typeIdB1' => $typeBId,
+            ':typeIdB2' => $typeBId,
+            ':typeIdA2' => $typeAId
+        ]);
+        $fetchedRules = $selectedRules->fetchAll();
+
+        if (empty($fetchedRules)) {
+            throw new Exception(
+                "(No rules for combination of Component Type: [$typeNameA] and [$typeNameB] found!)"
+            );
+        }
+
+        return $fetchedRules;
     }
 
     private function getTypeId(string $typeName): int
@@ -85,29 +138,53 @@ class CompatibilityRepository extends ConfiguratorRepository
             ':name' => $typeName
         ]);
 
-        $result = $selectedTypeId->fetch();
+        $fetchedId = $selectedTypeId->fetch();
 
-        if (!$result) {
+        if (!$fetchedId) {
             throw new Exception("Component type '$typeName' not found.");
         }
 
-        return (int) $result['id'];
+        return (int) $fetchedId['id'];
     }
 
-    public function getRulesForComponentAttribute(string $attribute): array
+    public function getRulesForComponentAttribute($attributeName): array
     {
+
+        if (!is_string($attributeName)) {
+            throw new Exception("(Attribute value have to be a string!)");
+        }
+
+        if (empty($attributeName)) {
+            throw new Exception("(No selected Attribute!)");
+        }
+
         $selectedRules = $this->CONFIGURATOR_DB->prepare("
-            SELECT cr.* 
+            SELECT 
+                cr.id,
+                cr.description,
+                ctA.name AS type_a_name,
+                ctB.name AS type_b_name,
+                cr.component_type_a AS type_a_id,
+                cr.component_type_b AS type_b_id,
+                adA.attribute_name AS attribute_a_name,
+                adB.attribute_name AS attribute_b_name,
+                cr.attribute_a AS attribute_a_id,
+                cr.attribute_b AS attribute_b_id,
+                cr.rule_type,
+                cr.created_at,
+                cr.updated_at
             FROM compatibility_rules cr
+            JOIN component_types ctA ON cr.component_type_a = ctA.id
+            JOIN component_types ctB ON cr.component_type_b = ctB.id
             JOIN attribute_definitions adA ON cr.attribute_a = adA.id
             JOIN attribute_definitions adB ON cr.attribute_b = adB.id
-            WHERE adA.attribute_name = :attrA
-               OR adB.attribute_name = :attrB
+            WHERE adA.attribute_name = :attrNameA
+               OR adB.attribute_name = :attrNameB
         ");
 
         $this->bindAndExecute($selectedRules, [
-            ':attrA' => $attribute,
-            ':attrB' => $attribute
+            ':attrNameA' => $attributeName,
+            ':attrNameB' => $attributeName
         ]);
 
         return $selectedRules->fetchAll();
@@ -116,8 +193,25 @@ class CompatibilityRepository extends ConfiguratorRepository
     public function getRulesByOperator(string $operator): array
     {
         $selectedOperator = $this->CONFIGURATOR_DB->prepare("
-            SELECT *
-            FROM compatibility_rules
+            SELECT 
+                cr.id,
+                cr.description,
+                ctA.name AS type_a_name,
+                ctB.name AS type_b_name,
+                cr.component_type_a AS type_a_id,
+                cr.component_type_b AS type_b_id,
+                adA.attribute_name AS attribute_a_name,
+                adB.attribute_name AS attribute_b_name,
+                cr.attribute_a AS attribute_a_id,
+                cr.attribute_b AS attribute_b_id,
+                cr.rule_type,
+                cr.created_at,
+                cr.updated_at
+            FROM compatibility_rules cr
+            JOIN component_types ctA ON cr.component_type_a = ctA.id
+            JOIN component_types ctB ON cr.component_type_b = ctB.id
+            JOIN attribute_definitions adA ON cr.attribute_a = adA.id
+            JOIN attribute_definitions adB ON cr.attribute_b = adB.id
             WHERE rule_type = :operator
         ");
 

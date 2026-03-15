@@ -1,29 +1,21 @@
 <?php
 
-require_once __DIR__ . '/../database/Connection.php';
-
 abstract class ConfiguratorRepository
 {
-    protected PDO $CONFIGURATOR_DB;
+    protected ComponentsRepository $componentsRepository;
+    protected CompAttributesRepository $compAttributesRepository;
+    protected CompTypeRepository $compTypeRepository;
+    protected CompCategoryRepository $compCategoryRepository;
+    protected CompatibilityRepository $compatibilityRepository;
+    // protected PricingRepository $pricingRepository;
 
     public function __construct()
     {
-        $this->CONFIGURATOR_DB = Database::getConnection('pcConfigurator');
-    }
-
-    protected function bindAndExecute(PDOStatement $pdo, array $variables): void
-    {
-        foreach ($variables as $key => $value) {
-            
-            $type = match (true) {
-                is_int($value) => PDO::PARAM_INT,
-                is_bool($value) => PDO::PARAM_BOOL,
-                is_null($value) => PDO::PARAM_NULL,
-                default => PDO::PARAM_STR,
-            };
-            
-            $pdo->bindValue($key, $value, $type);
-        }
-        $pdo->execute();
+        $this->componentsRepository = new ComponentsRepository();
+        $this->compAttributesRepository = new CompAttributesRepository();
+        $this->compTypeRepository = new CompTypeRepository();
+        $this->compCategoryRepository = new CompCategoryRepository();
+        $this->compatibilityRepository = new CompatibilityRepository();
+        // $this->pricingRepository = new PricingRepository();
     }
 }

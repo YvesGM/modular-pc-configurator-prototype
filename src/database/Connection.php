@@ -35,4 +35,4 @@ class Database
         return self::$DBCONNECTIONS[$db];
     }
 
-};
+}; 

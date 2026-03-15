@@ -1,15 +1,18 @@
 <?php
 
-require_once __DIR__ . '/../ConfiguratorRepository.php';
+require_once __DIR__ . '/../DatabaseRepoConnections.php';
 
-class CompTypeRepository extends ConfiguratorRepository
+class CompTypeRepository extends DatabaseRepoConnections
 {
     // All Component Types
     public function getAllComponentTypes(): array
     {
         $allComponentTypes = $this->CONFIGURATOR_DB->query("
-            SELECT id, name, description
-            FROM component_types
+            SELECT 
+                ct.*,
+                cc.name AS type_category
+            FROM component_types ct
+            JOIN component_categories cc ON ct.category_id = cc.id
         ");
 
         return $allComponentTypes->fetchAll();
@@ -18,16 +21,21 @@ class CompTypeRepository extends ConfiguratorRepository
     // Get Types by Category
     public function getTypesByCategory(string $category): array
     {
+        if (empty($category)) {
+            throw new Exception("(No Category selected!)");
+        }
+
         $selectedCategoryTypes = $this->CONFIGURATOR_DB->prepare("
-           SELECT ct.*
+            SELECT 
+                ct.*,
+                cc.name AS category
             FROM component_types ct
-            JOIN component_categories cc
-            ON ct.category_id = cc.id
-            WHERE cc.name = :category
+            JOIN component_categories cc ON ct.category_id = cc.id
+            WHERE cc.name = :type_category
         ");
 
         $selectedCategoryTypes->execute([
-            'category' => $category
+            ':type_category' => $category
         ]);
 
         return $selectedCategoryTypes->fetchAll();

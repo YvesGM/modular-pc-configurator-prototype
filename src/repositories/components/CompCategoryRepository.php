@@ -1,15 +1,16 @@
 <?php
 
-require_once __DIR__ . '/../ConfiguratorRepository.php';
+require_once __DIR__ . '/../DatabaseRepoConnections.php';
 
-class CompCategoryRepository extends ConfiguratorRepository
+class CompCategoryRepository extends DatabaseRepoConnections
 {
     // Get all Component Categories
     public function getAllComponentCategories(): array
     {
         $allCategories = $this->CONFIGURATOR_DB->query("
-            SELECT id, name, description
-            FROM component_categories
+            SELECT 
+                cc.*
+            FROM component_categories cc
         ");
 
         return $allCategories->fetchAll();

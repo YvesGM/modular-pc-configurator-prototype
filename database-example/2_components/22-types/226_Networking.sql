@@ -11,6 +11,6 @@ VALUES
 -- #13
     (
         6,
-        'wi-fi_card',
+        'wifi_card',
         'Network interface card (NIC) that provides wireless network connectivity through Wi-Fi standards'
     );

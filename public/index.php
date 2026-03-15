@@ -14,52 +14,57 @@
 
     <!-- COMPONENT REPOSITORY -->
     <?php
+    // COMPONENT REPOSITORY
     require_once __DIR__ . '/../src/autoload.php';
 
     $components = new ComponentsRepository();
-    $componentService = new ComponentService();
+    $componentsService = new ComponentsService();
     $attributes = new CompAttributesRepository();
     $types = new CompTypeRepository();
     $categories = new CompCategoryRepository();
 
     // Components
     $all = $components->getAllComponents();
-    $byId = $components->getComponentById(10);
+    $byId = $components->getComponentById(21);
     $byMultiId = $components->getComponentsByMultipleIds([30, 15, 20, 18]);
     $byType = $components->getComponentsByType('motherboard');
     $byCat = $components->getComponentsByCategory('core_components');
 
     // Attributes
     $attrOfComp = $attributes->getComponentAttributes(20);
-    $compAttrMap = $attributes->mappedComponentAttributes(20);
-    $compAndAttr = $componentService->getComponentWithAttributes(20);
+    $compAttrMap = $attributes->mappedComponentAttributes(21);
     $attrDef = $attributes->getAllAttributes();
 
     // Types
-    $ctype = $types->getAllComponentTypes();
-    $tcat = $types->getTypesByCategory('system_components');
+    $allCTypes = $types->getAllComponentTypes();
+    $ctCat = $types->getTypesByCategory('system_components');
 
     // Categories
-    $allCat = $categories->getAllComponentCategories();
+    $allCCat = $categories->getAllComponentCategories();
 
-
-
-    // COMPATIBILITY
+    // COMPATIBILITY REPOSITORY
     $compatibilityRepo = new CompatibilityRepository();
     $compatibilityService = new CompatibilityService();
 
-    // Repositories
     $allRules = $compatibilityRepo->getAllRules();
     $compTypeRules = $compatibilityRepo->getRulesForComponentType('cpu');
     $rulesBetweenTypes = $compatibilityRepo->getRulesBetweenComponentTypes('cpu', 'motherboard');
     $rulesForAttribute = $compatibilityRepo->getRulesForComponentAttribute('memory_type');
     $rulesByOperator = $compatibilityRepo->getRulesByOperator('less_equal');
 
-    // Services
-    // $validate = $compatibilityService->validateComponents('cpu', 'motherboard');
+    // COMPONENT SERVICES
+    $compAndAttr = $componentsService->getComponentWithAttributes(21);
+    $validateTrue = $compatibilityService->validateComponents(1, 18);
+    $validateFalse = $compatibilityService->validateComponents(1, 20);
 
     echo "<pre>";
-    print_r($byCat);
+    print_r($compAndAttr);
+    echo str_repeat('_', 100) . "<br>";
+    print_r($validateTrue);
+    print_r($validateFalse);
+    echo str_repeat('_', 100) . "<br>";
+    var_dump($validateTrue);
+    var_dump($validateFalse);
     ?>
 
 </body>

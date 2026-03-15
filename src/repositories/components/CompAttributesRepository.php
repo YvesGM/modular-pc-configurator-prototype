@@ -1,20 +1,16 @@
 <?php
 
-require_once __DIR__ . '/../ConfiguratorRepository.php';
+require_once __DIR__ . '/../DatabaseRepoConnections.php';
 
-class CompAttributesRepository extends ConfiguratorRepository 
+class CompAttributesRepository extends DatabaseRepoConnections 
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     // Get all Attributes
     public function getAllAttributes(): array
     {
         $allAttributes = $this->CONFIGURATOR_DB->query("
-            SELECT id, attribute_name, attribute_unit
-            FROM attribute_definitions
+            SELECT 
+                ad.* 
+            FROM attribute_definitions ad
         ");
 
         return $allAttributes->fetchAll();
@@ -22,29 +18,35 @@ class CompAttributesRepository extends ConfiguratorRepository
 
     // Attributes of an Component
     public function getComponentAttributes(int $componentId): array
-    {
-        $allAttributesOfComponent = $this->CONFIGURATOR_DB->prepare("
+    {   
+        if ($componentId <= 0) {
+            throw new Exception("(The Component ID cannot be 0 or negative! [$componentId])");
+        };
+
+        $AttributesOfSelectedComponent = $this->CONFIGURATOR_DB->prepare("
         SELECT 
-            ad.attribute_name,
+            ca.attribute_id,
+            ad.attribute_name AS attribute_name,
             ca.attribute_value
         FROM component_attributes ca
-        JOIN attribute_definitions ad
-            ON ca.attribute_id = ad.id
+        JOIN attribute_definitions ad ON ca.attribute_id = ad.id
+        JOIN components c ON ca.component_id = c.id
         WHERE ca.component_id = :componentId
     ");
 
-        $allAttributesOfComponent->execute([
-            'componentId' => $componentId
+        $this->bindAndExecute($AttributesOfSelectedComponent, [
+            ':componentId' => $componentId
         ]);
 
-        $fetchedAttributesOfComponent = $allAttributesOfComponent->fetchAll();
-        if (empty($fetchedAttributesOfComponent)) {
+        $fetchedAttributesOfSelectedComponent = $AttributesOfSelectedComponent->fetchAll();
+        
+        if (empty($fetchedAttributesOfSelectedComponent)) {
             throw new Exception(
-                "There are no attributes or components for ID: ($componentId)"
+                "(There are no attributes or components for this ID [$componentId])"
             );
         }
 
-        return $fetchedAttributesOfComponent;
+        return $fetchedAttributesOfSelectedComponent;
     }
 
     // Re-Mapping of Attribute
