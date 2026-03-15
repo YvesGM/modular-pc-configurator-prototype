@@ -15,7 +15,7 @@ class CompatibilityRepository extends ConfiguratorRepository
         return $allCompatibilityRules->fetchAll();
     }
 
-    public function getRulesForComponentType(string $componentTypeId): array
+    public function getRulesForComponentType(string $componentType): array
     {
         $selectedRules = $this->CONFIGURATOR_DB->prepare("
             SELECT cr.*
@@ -27,8 +27,8 @@ class CompatibilityRepository extends ConfiguratorRepository
         ");
 
         $this->bindAndExecute($selectedRules, [
-            ':typeA' => $componentTypeId,
-            ':typeB' => $componentTypeId
+            ':typeA' => $componentType,
+            ':typeB' => $componentType
         ]);
 
         return $selectedRules->fetchAll();
@@ -40,13 +40,28 @@ class CompatibilityRepository extends ConfiguratorRepository
         $typeBId = $this->getTypeId($typeB);
 
         $selectedRules = $this->CONFIGURATOR_DB->prepare("
-            SELECT *
-            FROM compatibility_rules
+                SELECT
+                cr.id,
+                cr.component_type_a,
+                cr.component_type_b,
+                ctA.name AS type_a_name,
+                ctB.name AS type_b_name,
+                adA.attribute_name AS attribute_a,
+                adB.attribute_name AS attribute_b,
+                cr.rule_type,
+                cr.description
+            FROM compatibility_rules cr
+            JOIN component_types ctA ON cr.component_type_a = ctA.id
+            JOIN component_types ctB ON cr.component_type_b = ctB.id
+            JOIN attribute_definitions adA 
+                ON cr.attribute_a = adA.id
+            JOIN attribute_definitions adB 
+                ON cr.attribute_b = adB.id
             WHERE 
-                (component_type_a = :typeA1 AND component_type_b = :typeB1)
+                (cr.component_type_a = :typeA1 AND cr.component_type_b = :typeB1)
             OR
-                (component_type_a = :typeB2 AND component_type_b = :typeA2)
-            ");
+                (cr.component_type_a = :typeB2 AND cr.component_type_b = :typeA2)
+        ");
 
         $this->bindAndExecute($selectedRules, [
             ':typeA1' => $typeAId,
@@ -71,6 +86,10 @@ class CompatibilityRepository extends ConfiguratorRepository
         ]);
 
         $result = $selectedTypeId->fetch();
+
+        if (!$result) {
+            throw new Exception("Component type '$typeName' not found.");
+        }
 
         return (int) $result['id'];
     }
@@ -103,7 +122,7 @@ class CompatibilityRepository extends ConfiguratorRepository
         ");
 
         $this->bindAndExecute($selectedOperator, [
-            'operator' => $operator
+            ':operator' => $operator
         ]);
 
         return $selectedOperator->fetchAll();

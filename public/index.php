@@ -17,6 +17,7 @@
     require_once __DIR__ . '/../src/autoload.php';
 
     $components = new ComponentsRepository();
+    $componentService = new ComponentService();
     $attributes = new CompAttributesRepository();
     $types = new CompTypeRepository();
     $categories = new CompCategoryRepository();
@@ -24,14 +25,14 @@
     // Components
     $all = $components->getAllComponents();
     $byId = $components->getComponentById(10);
-    $byMultiId = $components->getComponentsByMultipleIds([1, 15, 67, 100]);
-    $byType = $components->getComponentsByType('gpu');
-    $byCat = $components->getComponentsByCategory('system_components');
+    $byMultiId = $components->getComponentsByMultipleIds([30, 15, 20, 18]);
+    $byType = $components->getComponentsByType('motherboard');
+    $byCat = $components->getComponentsByCategory('core_components');
 
     // Attributes
     $attrOfComp = $attributes->getComponentAttributes(20);
     $compAttrMap = $attributes->mappedComponentAttributes(20);
-    $compAndAttr = $attributes->getComponentWithAttributes(20);
+    $compAndAttr = $componentService->getComponentWithAttributes(20);
     $attrDef = $attributes->getAllAttributes();
 
     // Types
@@ -44,16 +45,21 @@
 
 
     // COMPATIBILITY
-    $compatibility = new CompatibilityRepository();
+    $compatibilityRepo = new CompatibilityRepository();
+    $compatibilityService = new CompatibilityService();
 
-    $allRules = $compatibility->getAllRules();
-    $compTypeRules = $compatibility->getRulesForComponentType('cpu');
-    $rulesBetweenTypes = $compatibility->getRulesBetweenComponentTypes('cpu', 'motherboard');
-    $rulesForAttribute = $compatibility->getRulesForComponentAttribute('memory_type');
-    $rulesByOperator = $compatibility->getRulesByOperator('less_equal');
+    // Repositories
+    $allRules = $compatibilityRepo->getAllRules();
+    $compTypeRules = $compatibilityRepo->getRulesForComponentType('cpu');
+    $rulesBetweenTypes = $compatibilityRepo->getRulesBetweenComponentTypes('cpu', 'motherboard');
+    $rulesForAttribute = $compatibilityRepo->getRulesForComponentAttribute('memory_type');
+    $rulesByOperator = $compatibilityRepo->getRulesByOperator('less_equal');
+
+    // Services
+    // $validate = $compatibilityService->validateComponents('cpu', 'motherboard');
 
     echo "<pre>";
-    print_r($rulesByOperator);
+    print_r($byCat);
     ?>
 
 </body>

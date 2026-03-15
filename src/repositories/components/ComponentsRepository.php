@@ -9,15 +9,7 @@ class ComponentsRepository extends ConfiguratorRepository
     {
         $allComponents = $this->CONFIGURATOR_DB->query("
             SELECT
-                c.id,
-                c.name,
-                c.brand,
-                c.model,
-                c.net_price,
-                c.currency_id,
-                c.description,
-                c.created_at,
-                c.updated_at,
+                c.*,
                 ct.name AS component_type
             FROM components c
             JOIN component_types ct ON c.type_id = ct.id
@@ -28,34 +20,43 @@ class ComponentsRepository extends ConfiguratorRepository
 
     // Components by ID
     public function getComponentById(int $componentId): array
-    {
+    {   
+
+        if (!is_int($componentId) || $componentId <= 0) {
+            throw new Exception("The Component ID must be positive integers");
+        };
+
         $currentComponent = $this->CONFIGURATOR_DB->prepare("
-            SELECT *
-            FROM components
-            WHERE id = :id
+            SELECT 
+                c.*,
+                ct.name AS component_type
+            FROM components c
+            JOIN component_types ct ON c.type_id = ct.id
+            WHERE c.id = :id
         ");
 
         $currentComponent->execute([
             'id' => $componentId
         ]);
 
-        $fetchedComponents = $currentComponent->fetch();
+        $fetchedComponent = $currentComponent->fetch();
 
-        if (empty($fetchedComponents)) {
+        if (empty($fetchedComponent)) {
             throw new Exception(
                 "There is no existing Component with the ID: ($componentId)"
             );
-        }
+        };
 
-        return $fetchedComponents;
+        return $fetchedComponent;
     }
 
-    // Components on multiple ID`s
+    // Components by multiple ID`s
     public function getComponentsByMultipleIds(array $componentIds): array
     {
-        if (empty($componentIds)) {
-            throw new Exception("Component IDs array cannot be empty");
+        if (empty($componentIds)|| !is_array($componentIds) ) {
+            throw new Exception("There is no array or array is empty");
         }
+
         foreach ($componentIds as $id) {
             if (!is_int($id) || $id <= 0) {
                 throw new Exception("All component IDs must be positive integers");
@@ -73,7 +74,7 @@ class ComponentsRepository extends ConfiguratorRepository
 
         if (empty($fetchedComponents)) {
             throw new Exception(
-                "No components found for IDs: " . implode(', ', $componentIds)
+                "No components found for all IDs: " . implode(', ', $componentIds)
             );
         }
 
@@ -83,7 +84,7 @@ class ComponentsRepository extends ConfiguratorRepository
 
             if (count($missingIds) > 0) {
                 throw new Exception(
-                    "Ids: " . implode(', ', $missingIds) . " not found"
+                    "Ids: " . "(".implode(', ', $missingIds).")" . " not found"
                 );
             }
         }
@@ -92,26 +93,27 @@ class ComponentsRepository extends ConfiguratorRepository
     }
 
     // Components by Type
-    public function getComponentsByType(string $componentType): array
+    public function getComponentsByType($componentType): array
     {
+        if (!is_string($componentType)) {
+            throw new Exception("Component Type has to be a string");
+        }
+
+        if ($componentType === "") {
+            throw new Exception("No Type value selected!");
+        }
+        
         $selectedType = $this->CONFIGURATOR_DB->prepare("
             SELECT 
-                c.id,
-                c.name,
-                c.brand,
-                c.model,
-                c.net_price,
-                c.currency_id,
-                c.description,
-                c.created_at,
-                c.updated_at
+                c.*,
+                ct.name AS components_type
             FROM components c
             JOIN component_types ct ON c.type_id = ct.id
-            WHERE ct.name = :type
+            WHERE ct.name = :components_type
         ");
 
         $selectedType->execute([
-            'type' => $componentType
+            ':components_type' => $componentType
         ]);
 
         $fetchedComponents = $selectedType->fetchAll();
@@ -126,36 +128,36 @@ class ComponentsRepository extends ConfiguratorRepository
     }
 
     // Components by Category
-    public function getComponentsByCategory(string $category): array
+    public function getComponentsByCategory($componentCategory): array
     {
+        if (!is_string($componentCategory)) {
+            throw new Exception("Component Category has to be a string");
+        }
+
+        if ($componentCategory === "") {
+            throw new Exception("No Category value selected!");
+        }
+
         $selectedCategory = $this->CONFIGURATOR_DB->prepare("
             SELECT 
-                c.id,
-                c.name,
-                c.brand,
-                c.model,
-                c.net_price,
-                c.currency_id,
-                c.description,
-                c.created_at,
-                c.updated_at,
-                ct.name AS type,
-                cc.name AS category
+                c.*,
+                ct.name AS component_type,
+                cc.name AS component_category
             FROM components c
             JOIN component_types ct ON c.type_id = ct.id
             JOIN component_categories cc ON ct.category_id = cc.id
-            WHERE cc.name = :category
+            WHERE cc.name = :components_category
         ");
 
         $selectedCategory->execute([
-            'category' => $category
+            ':components_category' => $componentCategory
         ]);
 
-        $fetchedComponents = $selectedCategory->fetch();
+        $fetchedComponents = $selectedCategory->fetchAll();
 
         if (empty($fetchedComponents)) {
             throw new Exception(
-                "There are no components for $category or it`s not existing!"
+                "There are no components for $componentCategory or it`s not existing!"
             );
         }
 

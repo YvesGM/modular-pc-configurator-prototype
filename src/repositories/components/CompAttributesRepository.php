@@ -4,15 +4,15 @@ require_once __DIR__ . '/../ConfiguratorRepository.php';
 
 class CompAttributesRepository extends ConfiguratorRepository 
 {
-    private ComponentsRepository $components;
-    public function __construct() {
-        $this->components = new ComponentsRepository();
+    public function __construct()
+    {
+        parent::__construct();
     }
 
     // Get all Attributes
     public function getAllAttributes(): array
     {
-        $allAttributes = $this->components->CONFIGURATOR_DB->query("
+        $allAttributes = $this->CONFIGURATOR_DB->query("
             SELECT id, attribute_name, attribute_unit
             FROM attribute_definitions
         ");
@@ -23,7 +23,7 @@ class CompAttributesRepository extends ConfiguratorRepository
     // Attributes of an Component
     public function getComponentAttributes(int $componentId): array
     {
-        $allAttributesOfComponent = $this->components->CONFIGURATOR_DB->prepare("
+        $allAttributesOfComponent = $this->CONFIGURATOR_DB->prepare("
         SELECT 
             ad.attribute_name,
             ca.attribute_value
@@ -58,14 +58,5 @@ class CompAttributesRepository extends ConfiguratorRepository
         }
 
         return $Attributes;
-    }
-
-    // Component + Attribute
-    public function getComponentWithAttributes(int $componentId): array|null
-    {
-        $selectedComponent = $this->components->getComponentById($componentId);
-        $selectedComponent['attributes'] = $this->mappedComponentAttributes($componentId);
-
-        return $selectedComponent;
     }
 }
