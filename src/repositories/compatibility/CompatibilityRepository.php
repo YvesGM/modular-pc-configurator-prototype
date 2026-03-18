@@ -118,9 +118,7 @@ class CompatibilityRepository extends DatabaseRepoConnections
         $fetchedRules = $selectedRules->fetchAll();
 
         if (empty($fetchedRules)) {
-            throw new Exception(
-                "(No rules for combination of Component Type: [$typeNameA] and [$typeNameB] found!)"
-            );
+            return [];
         }
 
         return $fetchedRules;

@@ -9,7 +9,7 @@ class TaxRepository extends DatabaseRepoConnections
         $selectedTax = $this->CONFIGURATOR_DB->prepare("
             SELECT 
                 tRate.rate
-            FROM tax_rates tRate WHERE tax_class_id = :id
+            FROM tax_rates tRate WHERE tRate.tax_class_id = :id
         ");
 
         $this->bindAndExecute($selectedTax, [

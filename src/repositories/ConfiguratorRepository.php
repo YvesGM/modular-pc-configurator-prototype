@@ -1,5 +1,13 @@
 <?php
 
+require_once __DIR__ . '/components/ComponentsRepository.php';
+require_once __DIR__ . '/components/CompTypeRepository.php';
+require_once __DIR__ . '/components/CompCategoryRepository.php';
+require_once __DIR__ . '/components/CompAttributesRepository.php';
+require_once __DIR__ . '/compatibility/CompatibilityRepository.php';
+require_once __DIR__ . '/pricing/CurrencyRepository.php';
+require_once __DIR__ . '/pricing/TaxRepository.php';
+require_once __DIR__ . '/pricing/PromotionsRepository.php';
 abstract class ConfiguratorRepository
 {
     protected ComponentsRepository $componentsRepository;
@@ -11,7 +19,7 @@ abstract class ConfiguratorRepository
     
     protected CurrencyRepository $currencyRepository;
     protected PromotionsRepository $promotionsRepository;
-    protected TaxRepository $TaxesRepository;
+    protected TaxRepository $taxRepository;
 
     public function __construct()
     {
@@ -24,6 +32,6 @@ abstract class ConfiguratorRepository
         
         $this->currencyRepository = new CurrencyRepository();
         $this->promotionsRepository = new PromotionsRepository();
-        $this->TaxesRepository = new TaxRepository();
+        $this->taxRepository = new TaxRepository();
     }
 }

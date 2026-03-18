@@ -20,10 +20,16 @@ class CompatibilityService extends ConfiguratorRepository
 
         $ctypeA = $compAId['component_type'];
         $ctypeB = $compBId['component_type'];
-    
+
 
         $rulesBetweenTypes = $this->compatibilityRepository->getRulesBetweenComponentTypes($ctypeA, $ctypeB);
-
+        if (empty($rulesBetweenTypes)) {
+            return [
+                'is_compatible' => true,
+                'rules_checked' => []
+            ];
+        }
+        
         $validated = [];
 
         foreach ($rulesBetweenTypes as $TypeRule) {
@@ -38,13 +44,14 @@ class CompatibilityService extends ConfiguratorRepository
                 $valueA = $compBId['attributes'][$TypeRule['attribute_a_name']] ?? null;
                 $valueB = $compAId['attributes'][$TypeRule['attribute_b_name']] ?? null;
 
-            };
+            }
+            ;
 
             $passed = $this->evaluateRule(
                 $TypeRule['rule_type'],
                 $valueA,
                 $valueB
-                );
+            );
 
             $validated[] = [
                 'rule_id' => $TypeRule['id'],
