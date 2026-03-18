@@ -6,8 +6,12 @@ abstract class ConfiguratorRepository
     protected CompAttributesRepository $compAttributesRepository;
     protected CompTypeRepository $compTypeRepository;
     protected CompCategoryRepository $compCategoryRepository;
+    
     protected CompatibilityRepository $compatibilityRepository;
-    // protected PricingRepository $pricingRepository;
+    
+    protected CurrencyRepository $currencyRepository;
+    protected PromotionsRepository $promotionsRepository;
+    protected TaxRepository $TaxesRepository;
 
     public function __construct()
     {
@@ -15,7 +19,11 @@ abstract class ConfiguratorRepository
         $this->compAttributesRepository = new CompAttributesRepository();
         $this->compTypeRepository = new CompTypeRepository();
         $this->compCategoryRepository = new CompCategoryRepository();
+        
         $this->compatibilityRepository = new CompatibilityRepository();
-        // $this->pricingRepository = new PricingRepository();
+        
+        $this->currencyRepository = new CurrencyRepository();
+        $this->promotionsRepository = new PromotionsRepository();
+        $this->TaxesRepository = new TaxRepository();
     }
 }

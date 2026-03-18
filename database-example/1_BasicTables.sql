@@ -6,6 +6,8 @@ CREATE TABLE
         code VARCHAR(3) NOT NULL,
         symbol VARCHAR(5),
         name VARCHAR(50),
+        exchange_rate DECIMAL(5, 2) NOT NULL,
+        is_base BOOLEAN DEFAULT TRUE,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );

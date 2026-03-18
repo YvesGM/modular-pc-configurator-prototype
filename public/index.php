@@ -12,7 +12,6 @@
 
 <body>
 
-    <!-- COMPONENT REPOSITORY -->
     <?php
     // COMPONENT REPOSITORY
     require_once __DIR__ . '/../src/autoload.php';
@@ -22,6 +21,8 @@
     $attributes = new CompAttributesRepository();
     $types = new CompTypeRepository();
     $categories = new CompCategoryRepository();
+    $promotions = new PromotionsRepository();
+    $currencies = new CurrencyRepository();
 
     // Components
     $all = $components->getAllComponents();
@@ -52,6 +53,11 @@
     $rulesForAttribute = $compatibilityRepo->getRulesForComponentAttribute('memory_type');
     $rulesByOperator = $compatibilityRepo->getRulesByOperator('less_equal');
 
+    // PRICINGREPOSITORY
+    $allCurrencies = $currencies->getAllCurrencies();
+    $codeCurrencies = $currencies->getCurrencyByCode('USD');
+    $convertCurrencies = $currencies->convertCurrency(10, 'USD', 'EUR');
+
     // COMPONENT SERVICES
     $compAndAttr = $componentsService->getComponentWithAttributes(21);
     $validateTrue = $compatibilityService->validateComponents(1, 18);
@@ -65,6 +71,8 @@
     echo str_repeat('_', 100) . "<br>";
     var_dump($validateTrue);
     var_dump($validateFalse);
+    echo str_repeat('_', 100) . "<br>";
+    print_r($codeCurrencies);
     ?>
 
 </body>
