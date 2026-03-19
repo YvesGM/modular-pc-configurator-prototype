@@ -7,34 +7,34 @@ export function renderSelectedComponents() {
     const container = document.getElementById("selected-container");
     container.innerHTML = "";
 
-    const grouped = {};
+    const groupedComponents = {};
 
     // Gruppieren nach Typ
     selectedComponents.forEach(id => {
-        const comp = componentMap[id];
+        const component = componentMap[id];
 
-        if (!grouped[comp.component_type]) {
-            grouped[comp.component_type] = [];
+        if (!groupedComponents[component.component_type]) {
+            groupedComponents[component.component_type] = [];
         }
 
-        grouped[comp.component_type].push(comp);
+        groupedComponents[component.component_type].push(component);
     });
 
     // UI bauen
-    for (const type in grouped) {
+    for (const componentType in groupedComponents) {
 
-        const section = document.createElement("div");
-        section.className = "selected-section";
+        const typeSection = document.createElement("div");
+        typeSection.className = "selected_section";
 
         const title = document.createElement("h4");
-        title.textContent = type.toUpperCase();
+        title.textContent = componentType.toUpperCase();
 
-        section.appendChild(title);
+        typeSection.appendChild(title);
 
-        grouped[type].forEach(comp => {
+        groupedComponents[componentType].forEach(comp => {
 
             const item = document.createElement("div");
-            item.className = "selected-item";
+            item.className = "selected_item";
 
             const label = document.createElement("span");
             label.textContent = comp.name;
@@ -47,7 +47,7 @@ export function renderSelectedComponents() {
             item.appendChild(btn);
         });
 
-        container.appendChild(section);
+        container.appendChild(typeSection);
     }
 
 }

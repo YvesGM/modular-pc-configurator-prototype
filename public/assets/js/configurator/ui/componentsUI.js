@@ -1,44 +1,44 @@
 import { toggleComponent } from "../logic/selection.js";
 
 export function componentsUI(components, container) {
-    const grouped = {};
+    const groupedComponents = {};
 
-    components.forEach(c => {
-        if (!grouped[c.component_type]) {
-            grouped[c.component_type] = [];
+    components.forEach(component => {
+        if (!groupedComponents[component.component_type]) {
+            groupedComponents[component.component_type] = [];
         }
-        grouped[c.component_type].push(c);
+        groupedComponents[component.component_type].push(component);
     });
 
-    for (const type in grouped) {
+    for (const componentType in groupedComponents) {
 
-        const section = document.createElement("div");
-        section.className = "component-section";
+        const typeSection = document.createElement("div");
+        typeSection.className = "component_section";
 
-        section.innerHTML = `<h3>${type.toUpperCase()}</h3>`;
+        typeSection.innerHTML = `<h3>${componentType.toUpperCase()}</h3>`;
 
-        grouped[type].forEach(c => {
+        groupedComponents[componentType].forEach(component => {
 
-            const card = document.createElement("div");
-            card.className = "component-card";
+            const componentCard = document.createElement("div");
+            componentCard.className = "component_card";
 
-            card.innerHTML = `
-                <div class="card-content">
-                    <strong>${c.name}</strong><br>
-                    <small>${c.brand}</small><br>
-                    ${c.net_price} €
+            componentCard.innerHTML = `
+                <div class="card_content">
+                    <strong>${component.name}</strong><br>
+                    <small>${component.brand}</small><br>
+                    ${component.net_price} €
                 </div>
-                <div class="card-errors"></div>
+                <div class="card_errors"></div>
             `;
 
-            card.dataset.type = c.component_type;
-            card.dataset.id = c.id;
+            componentCard.dataset.type = component.component_type;
+            componentCard.dataset.id = component.id;
 
-            card.onclick = () => toggleComponent(c.id, card, c.component_type);
+            componentCard.onclick = () => toggleComponent(component.id, componentCard, component.component_type);
 
-            section.appendChild(card);
+            typeSection.appendChild(componentCard);
         });
 
-        container.appendChild(section);
+        container.appendChild(typeSection);
     }
 }

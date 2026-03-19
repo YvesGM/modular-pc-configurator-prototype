@@ -2,13 +2,13 @@ import { selectedComponents } from "../state/selectionState.js";
 
 export function applyValidationUI(config) {
 
-    const allCards = document.querySelectorAll(".component-card");
+    const allCards = document.querySelectorAll(".component_card");
 
     allCards.forEach(card => {
         card.classList.remove("valid", "invalid");
         card.title = "";
 
-        const errorDiv = card.querySelector(".card-errors");
+        const errorDiv = card.querySelector(".card_errors");
         if (errorDiv) errorDiv.innerHTML = "";
     });
 
@@ -45,7 +45,7 @@ export function applyValidationUI(config) {
 
         if (!selectedComponents.has(id)) return;
 
-        const errorDiv = card.querySelector(".card-errors");
+        const errorDiv = card.querySelector(".card_errors");
 
         if (invalidIds.has(id)) {
 
@@ -56,7 +56,7 @@ export function applyValidationUI(config) {
                 errorMap[id].forEach(err => {
 
                     const el = document.createElement("div");
-                    el.className = "error-line";
+                    el.className = "error_line";
                     el.textContent = "❌ " + err;
 
                     errorDiv.appendChild(el);

@@ -4,10 +4,10 @@ import { applyValidationUI } from "../ui/validationUI.js";
 
 export async function validateLive() {
 
-    const selected = Array.from(selectedComponents);
+    const selectedComps = Array.from(selectedComponents);
 
-    if (selected.length < 2) {
-        document.querySelectorAll(".component-card")
+    if (selectedComps.length < 2) {
+        document.querySelectorAll(".component_card")
             .forEach(card => {
                 card.classList.remove("valid", "invalid");
                 card.title = "";
@@ -15,7 +15,7 @@ export async function validateLive() {
         return;
     }
 
-    const data = await validateConfig(selected);
+    const data = await validateConfig(selectedComps);
 
     if (data.status !== "success") {
         console.error(data.message);

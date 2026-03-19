@@ -4,7 +4,7 @@ import { selectionRules } from "./selectionRules.js";
 import { getDynamicConstraints } from "./constraints.js";
 import { validateLive } from "./validate.js";
 
-export function toggleComponent(id, element, type) {
+export function toggleComponent(id, componentEl, type) {
     const rule = selectionRules[type] || { mode: "single" };
     const constraints = getDynamicConstraints();
 
@@ -28,8 +28,8 @@ export function toggleComponent(id, element, type) {
     }
 
     if (rule.mode === "single") {
-        document.querySelectorAll(`.component-card[data-type="${type}"]`)
-            .forEach(el => el.classList.remove("selected"));
+        document.querySelectorAll(`.component_card[data-type="${type}"]`)
+            .forEach(compEl => compEl.classList.remove("selected"));
 
         for (let compId of selectedComponents) {
             if (componentMap[compId].component_type === type) {
@@ -38,14 +38,14 @@ export function toggleComponent(id, element, type) {
         }
 
         selectedComponents.add(id);
-        element.classList.add("selected");
+        componentEl.classList.add("selected");
     }
 
     else if (rule.mode === "multiple") {
 
         if (selectedComponents.has(id)) {
             selectedComponents.delete(id);
-            element.classList.remove("selected");
+            componentEl.classList.remove("selected");
             renderSelectedComponents();
             validateLive();
             return;
@@ -67,7 +67,7 @@ export function toggleComponent(id, element, type) {
         }
 
         selectedComponents.add(id);
-        element.classList.add("selected");
+        componentEl.classList.add("selected");
     }
 
     renderSelectedComponents();
@@ -78,7 +78,7 @@ export function removeComponent(id) {
 
     selectedComponents.delete(id);
 
-    document.querySelectorAll(".component-card").forEach(card => {
+    document.querySelectorAll(".component_card").forEach(card => {
         if (parseInt(card.dataset.id) === id) {
             card.classList.remove("selected", "valid", "invalid");
         }

@@ -1,21 +1,21 @@
 import { componentMap } from "../state/selectionState.js";
-import { renderComponents } from "./render.js";
+import { renderConfigurator } from "./render.js";
 import { fetchComponents } from "../api/fetchComponents.js";
 
 export async function loadComponents() {
 
-    const data = await fetchComponents();
+    const componentData = await fetchComponents();
 
-    if (data.status !== "success") {
-        console.error(data.message);
+    if (componentData.status !== "success") {
+        console.error(componentData.message);
         return;
     }
 
-    const components = data.data;
+    const components = componentData.data;
 
-    components.forEach(c => {
-        componentMap[c.id] = c;
+    components.forEach(comps => {
+        componentMap[comps.id] = comps;
     });
 
-    renderComponents(components);
+    renderConfigurator(components);
 }

@@ -1,22 +1,14 @@
 <?php
 
-require_once __DIR__ . '/../../src/repositories/components/ComponentsRepository.php';
 require_once __DIR__ . '/../../src/services/ComponentsService.php';
 
 header('Content-Type: application/json');
 
 try {
 
-    $service = new ComponentsService();
+    $componentsService = new ComponentsService();
 
-    $repo = new ComponentsRepository();
-    $baseComponents = $repo->getAllComponents();
-
-    $components = [];
-
-    foreach ($baseComponents as $comp) {
-        $components[] = $service->getComponentWithAttributes($comp['id']);
-    }
+    $components = $componentsService->getAllComponentsWithAttributes();
 
     echo json_encode([
         'status' => 'success',

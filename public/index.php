@@ -6,32 +6,40 @@
     <title>PC Configurator</title>
 
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/layout/header.css">
+    <link rel="stylesheet" href="assets/css/layout/main.css">
+    <link rel="stylesheet" href="assets/css/layout/footer.css">
+    <link rel="stylesheet" href="assets/css/ui/buttons.css">
 </head>
 
 <body>
 
-    <div class="container">
-
+    <header>
         <h1>PC Configurator</h1>
+    </header>
 
-        <div class="config-box">
-            <label>Components</label>
+    <main>
 
-            <div class="component_container" id="component-container"></div>
-
-            <hr>
-
-            <h3>Selected Components</h3>
-            <div id="selected-container"></div>
-
-            <br>
+        <div class="configurator">
+            <div>
+                <label for="component-container">Components</label>
+                <div class="component_container" id="component-container"></div>
+                <hr>
+                <h3>Selected Components</h3>
+                <div id="selected-container" class="selected_container"></div>
+            </div>
 
             <button onclick="sendConfig()">Check Configuration</button>
+
         </div>
+        
+        <div id="output" class="output_box"></div>
 
-        <div id="output" class="output-box"></div>
+    </main>
 
-    </div>
+    <footer>
+
+    </footer>
 
     <script type="module" src="assets/js/configurator/components.js"></script>
     <script type="module" src="assets/js/configurator/api/sendConfig.js"></script>

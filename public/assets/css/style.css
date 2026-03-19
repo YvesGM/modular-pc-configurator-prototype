@@ -1,27 +1,27 @@
-body {
-    background: #0f172a;
-    color: #e2e8f0;
-    font-family: Arial, sans-serif;
+* {
     margin: 0;
+    box-sizing: border-box;
 }
 
-.component_container {
-    max-width: 800px;
-    margin: 40px auto;
-    max-height: 80vh;
+:root {
+    --header-h: 60px;
+    --footer-h: 80px;
+}
+
+html {
     overflow-y: auto;
+}
+
+body {
+    background: #000000;
+    color: #e2e8f0;
+    font-family: Arial, sans-serif;
+    overflow-y: hidden;
+    min-height: 100vh;
 }
 
 h1 {
     text-align: center;
-    margin-bottom: 30px;
-}
-
-.config-box {
-    background: #1e293b;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
 }
 
 select {
@@ -33,27 +33,6 @@ select {
     border: 1px solid #334155;
 }
 
-button {
-    margin-top: 15px;
-    padding: 10px;
-    width: 100%;
-    background: #3b82f6;
-    border: none;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #2563eb;
-}
-
-.output-box {
-    background: #1e293b;
-    padding: 20px;
-    border-radius: 10px;
-}
-
 .success {
     color: #22c55e;
 }
@@ -62,13 +41,13 @@ button:hover {
     color: #ef4444;
 }
 
-.selected-section {
+.selected_section {
     margin-bottom: 15px;
     padding: 10px;
     border: 1px solid #ccc;
 }
 
-.selected-item {
+.selected_item {
     display: flex;
     justify-content: space-between;
     padding: 5px;
@@ -76,7 +55,7 @@ button:hover {
     background: #383838;
 }
 
-.selected-item button {
+.selected_item button {
     background: red;
     width: 100px;
     color: white;
@@ -84,33 +63,33 @@ button:hover {
     cursor: pointer;
 }
 
-.component-card {
+.component_card {
     padding: 10px;
     margin: 5px;
     border: 1px solid #ccc;
     cursor: pointer;
 }
 
-.component-card.selected {
+.component_card.selected {
     border: 2px solid #007bff;
 }
 
-.component-card.valid {
+.component_card.valid {
     border: 2px solid green;
 }
 
-.component-card.invalid {
+.component_card.invalid {
     border: 2px solid red;
     background-color: #585858;
 }
 
-.card-errors {
+.card_errors {
     margin-top: 8px;
     font-size: 12px;
     color: red;
 }
 
-.error-line {
+.error_line {
     margin-top: 2px;
 }
 
