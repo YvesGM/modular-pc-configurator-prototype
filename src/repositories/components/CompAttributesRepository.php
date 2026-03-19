@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../DatabaseRepoConnections.php';
 
-class CompAttributesRepository extends DatabaseRepoConnections 
+class CompAttributesRepository extends DatabaseRepoConnections
 {
     // Get all Attributes
     public function getAllAttributes(): array
@@ -18,10 +18,11 @@ class CompAttributesRepository extends DatabaseRepoConnections
 
     // Attributes of an Component
     public function getComponentAttributes(int $componentId): array
-    {   
+    {
         if ($componentId <= 0) {
             throw new Exception("(The Component ID cannot be 0 or negative! [$componentId])");
-        };
+        }
+        ;
 
         $AttributesOfSelectedComponent = $this->CONFIGURATOR_DB->prepare("
         SELECT 
@@ -39,14 +40,8 @@ class CompAttributesRepository extends DatabaseRepoConnections
         ]);
 
         $fetchedAttributesOfSelectedComponent = $AttributesOfSelectedComponent->fetchAll();
-        
-        if (empty($fetchedAttributesOfSelectedComponent)) {
-            throw new Exception(
-                "(There are no attributes or components for this ID [$componentId])"
-            );
-        }
 
-        return $fetchedAttributesOfSelectedComponent;
+        return $fetchedAttributesOfSelectedComponent ?? [];
     }
 
     // Re-Mapping of Attribute
@@ -56,7 +51,23 @@ class CompAttributesRepository extends DatabaseRepoConnections
         $Attributes = [];
 
         foreach ($selectedAttributes as $singleAttribute) {
-            $Attributes[$singleAttribute['attribute_name']] = $singleAttribute['attribute_value'];
+
+            $name = $singleAttribute['attribute_name'];
+            $value = $singleAttribute['attribute_value'];
+
+            if (isset($Attributes[$name])) {
+
+                if (!is_array($Attributes[$name])) {
+                    $Attributes[$name] = [$Attributes[$name]];
+                }
+                
+                if (!in_array($value, $Attributes[$name])) {
+                    $Attributes[$name][] = $value;
+                }
+
+            } else {
+                $Attributes[$name] = $value;
+            }
         }
 
         return $Attributes;

@@ -2,29 +2,39 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Configurator</title>
 
-    <title>Modular PC Configurator</title>
-
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
 
-    <?php
-    require_once __DIR__ . '/../src/controllers/ConfiguratorController.php';
+    <div class="container">
 
-    $controller = new ConfiguratorController();
+        <h1>PC Configurator</h1>
 
-    $_POST = [
-        'componentIds' => [1, 24, 80],
-        'currency' => 'EUR',
-        'promoCode' => null
-    ];
+        <div class="config-box">
+            <label>Components</label>
 
-    $controller->run();
-    ?>
+            <div id="component-container"></div>
+
+            <hr>
+
+            <h3>Selected Components</h3>
+            <div id="selected-container"></div>
+
+            <br>
+
+            <button onclick="sendConfig()">Check Configuration</button>
+        </div>
+
+        <div id="output" class="output-box"></div>
+
+    </div>
+
+    <script type="module" src="assets/js/configurator/components.js"></script>
+    <script src="assets/js/configurator/api/sendConfig.js"></script>
 
 </body>
 

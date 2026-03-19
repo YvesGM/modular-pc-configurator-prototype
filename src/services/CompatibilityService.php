@@ -29,7 +29,7 @@ class CompatibilityService extends ConfiguratorRepository
                 'rules_checked' => []
             ];
         }
-        
+
         $validated = [];
 
         foreach ($rulesBetweenTypes as $TypeRule) {
@@ -47,15 +47,40 @@ class CompatibilityService extends ConfiguratorRepository
             }
             ;
 
-            $passed = $this->evaluateRule(
-                $TypeRule['rule_type'],
-                $valueA,
-                $valueB
-            );
+            if (
+                in_array('gpu_length', [$TypeRule['attribute_a_name'], $TypeRule['attribute_b_name']]) &&
+                in_array('max_gpu_length', [$TypeRule['attribute_a_name'], $TypeRule['attribute_b_name']])
+            ) {
+
+                // 🔥 Werte korrekt zuordnen – egal in welcher Reihenfolge
+                if ($TypeRule['attribute_a_name'] === 'gpu_length') {
+                    $gpu = $valueA;
+                    $case = $valueB;
+                } else {
+                    $gpu = $valueB;
+                    $case = $valueA;
+                }
+
+                $gpu = is_array($gpu) ? $gpu[0] : $gpu;
+                $case = is_array($case) ? $case[0] : $case;
+
+                $passed = (float) $gpu <= (float) $case;
+
+            } else {
+
+                $passed = $this->evaluateRule(
+                    $TypeRule['rule_type'],
+                    is_array($valueA) ? $valueA[0] : $valueA,
+                    is_array($valueB) ? $valueB[0] : $valueB
+                );
+            }
+            ;
 
             $validated[] = [
                 'rule_id' => $TypeRule['id'],
                 'description' => $TypeRule['description'],
+                'component_a_id' => $componentAId,
+                'component_b_id' => $componentBId,
                 'value_a' => $valueA,
                 'value_b' => $valueB,
                 'passed' => $passed ? true : false
@@ -79,10 +104,10 @@ class CompatibilityService extends ConfiguratorRepository
             case 'equals':
                 return $this->compareEqual($valueA, $valueB);
 
-            case 'greater':
+            case 'greater_equal':
                 return (float) $valueA >= (float) $valueB;
 
-            case 'less':
+            case 'less_equal':
                 return (float) $valueA <= (float) $valueB;
 
             default:
@@ -90,7 +115,7 @@ class CompatibilityService extends ConfiguratorRepository
         }
     }
 
-    private function compareEqual(string $valueA, string $valueB): bool
+    private function compareEqual($valueA, $valueB): bool
     {
         $listA = $this->parseList($valueA);
         $listB = $this->parseList($valueB);
@@ -106,8 +131,12 @@ class CompatibilityService extends ConfiguratorRepository
         return false;
     }
 
-    private function parseList(string $value): array
+    private function parseList($value): array
     {
+        if (is_array($value)) {
+            return $value;
+        }
+
         if (str_contains($value, ',')) {
             return array_map('trim', explode(',', $value));
         }
