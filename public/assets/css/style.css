@@ -5,7 +5,7 @@ body {
     margin: 0;
 }
 
-#component-container {
+.component_container {
     max-width: 800px;
     margin: 40px auto;
     max-height: 80vh;
@@ -62,18 +62,6 @@ button:hover {
     color: #ef4444;
 }
 
-.component-card {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin: 5px;
-    cursor: pointer;
-}
-
-.component-card.selected {
-    border: 2px solid #007bff;
-    background-color: #585858;
-}
-
 .selected-section {
     margin-bottom: 15px;
     padding: 10px;
@@ -94,19 +82,6 @@ button:hover {
     color: white;
     border: none;
     cursor: pointer;
-}
-
-.component-card.selected {
-    border: 2px solid #007bff;
-}
-
-.component-card.valid {
-    border: 2px solid green;
-}
-
-.component-card.invalid {
-    border: 2px solid red;
-    background-color: #a05353;
 }
 
 .component-card {

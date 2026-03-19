@@ -17,7 +17,7 @@
         <div class="config-box">
             <label>Components</label>
 
-            <div id="component-container"></div>
+            <div class="component_container" id="component-container"></div>
 
             <hr>
 
@@ -34,7 +34,7 @@
     </div>
 
     <script type="module" src="assets/js/configurator/components.js"></script>
-    <script src="assets/js/configurator/api/sendConfig.js"></script>
+    <script type="module" src="assets/js/configurator/api/sendConfig.js"></script>
 
 </body>
 

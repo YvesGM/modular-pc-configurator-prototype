@@ -1,4 +1,5 @@
 import { selectedComponents, componentMap } from "../state/selectionState.js";
+import { renderSelectedComponents } from "../ui/selectedUI.js";
 import { selectionRules } from "./selectionRules.js";
 import { getDynamicConstraints } from "./constraints.js";
 import { validateLive } from "./validate.js";
@@ -11,7 +12,13 @@ export function toggleComponent(id, element, type) {
 
         if (constraints.maxGpuLength) {
 
-            const gpuLength = parseInt(componentMap[id].attributes?.gpu_length[0] || 0);
+            let gpuLength = componentMap[id].attributes?.gpu_length ?? 0;
+
+            if (Array.isArray(gpuLength)) {
+                gpuLength = gpuLength[0];
+            }
+
+            gpuLength = parseInt(gpuLength || 0);
 
             if (gpuLength > constraints.maxGpuLength) {
                 alert("GPU too long for selected case");
@@ -65,53 +72,6 @@ export function toggleComponent(id, element, type) {
 
     renderSelectedComponents();
     validateLive();
-}
-
-function renderSelectedComponents() {
-
-    const container = document.getElementById("selected-container");
-    container.innerHTML = "";
-
-    const grouped = {};
-
-    // Gruppieren nach Typ
-    selectedComponents.forEach(id => {
-        const comp = componentMap[id];
-
-        if (!grouped[comp.component_type]) {
-            grouped[comp.component_type] = [];
-        }
-
-        grouped[comp.component_type].push(comp);
-    });
-
-    // UI bauen
-    for (const type in grouped) {
-
-        const section = document.createElement("div");
-        section.className = "selected-section";
-
-        const title = document.createElement("h4");
-        title.textContent = type.toUpperCase();
-
-        section.appendChild(title);
-
-        grouped[type].forEach(comp => {
-
-            const item = document.createElement("div");
-            item.className = "selected-item";
-
-            item.innerHTML = `
-                ${comp.name}
-                <button onclick="removeComponent(${comp.id})">❌</button>
-            `;
-
-            section.appendChild(item);
-        });
-
-        container.appendChild(section);
-    }
-
 }
 
 export function removeComponent(id) {

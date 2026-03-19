@@ -1,4 +1,6 @@
-async function sendConfig() {
+import { selectedComponents } from "../state/selectionState.js";
+
+export async function sendConfig() {
 
     const selected = Array.from(selectedComponents);
 
@@ -38,3 +40,5 @@ async function sendConfig() {
 
     output.textContent = html;
 }
+
+window.sendConfig = sendConfig;
