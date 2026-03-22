@@ -1,6 +1,6 @@
 import { componentsUI } from "../ui/componentsUI.js";
 
-export function renderConfigurator(components) {
+export function renderConfigurator(frontendData) {
 
     const compContainer = document.getElementById("component-container");
     if (!compContainer) {
@@ -9,5 +9,5 @@ export function renderConfigurator(components) {
     }
     compContainer.innerHTML = "";
 
-    componentsUI(components, compContainer);
+    componentsUI(frontendData, compContainer);
 }

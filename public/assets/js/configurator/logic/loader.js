@@ -1,21 +1,21 @@
+import { fetchData } from "../api/fetchData.js";
 import { componentMap } from "../state/selectionState.js";
 import { renderConfigurator } from "./render.js";
-import { fetchComponents } from "../api/fetchComponents.js";
 
 export async function loadComponents() {
 
-    const componentData = await fetchComponents();
+    const fetchedData = await fetchData();
 
-    if (componentData.status !== "success") {
-        console.error(componentData.message);
+    if ((fetchedData.status) !== "success") {
+        console.error(fetchedData.message);
         return;
     }
 
-    const components = componentData.data;
+    const frontendData = fetchedData.data;
 
-    components.forEach(comps => {
+    frontendData.forEach(comps => {
         componentMap[comps.id] = comps;
     });
 
-    renderConfigurator(components);
+    renderConfigurator(frontendData);
 }

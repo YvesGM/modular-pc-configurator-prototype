@@ -15,12 +15,9 @@ export async function sendConfig() {
         })
     });
 
-    const data = await res.json();
-
-    const output = document.getElementById("output");
-
-    const config = data.data;
-
+    const configurationBuild = await res.json();
+    const clientOutput = document.getElementById("output");
+    const config = configurationBuild.data;
     let html = "";
 
     html += config.compatibility.is_valid
@@ -38,7 +35,7 @@ export async function sendConfig() {
     html += "\n--------------------\n";
     html += `Total Price: ${config.pricing.gross_total.toFixed(2)} ${config.pricing.currency}`;
 
-    output.textContent = html;
+    clientOutput.textContent = html;
 }
 
 window.sendConfig = sendConfig;

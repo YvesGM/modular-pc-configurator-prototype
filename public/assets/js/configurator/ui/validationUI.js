@@ -38,7 +38,6 @@ export function applyValidationUI(config) {
         });
     });
 
-    // markieren
     allCards.forEach(card => {
 
         const id = parseInt(card.dataset.id);

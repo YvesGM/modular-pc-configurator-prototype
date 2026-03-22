@@ -3,7 +3,8 @@ import { selectedComponents, componentMap } from "../state/selectionState.js";
 export function getDynamicConstraints() {
     let constraints = {
         maxHdd: null,
-        maxGpuLength: null
+        maxGpuLength: null,
+        maxRam: null
     };
 
     selectedComponents.forEach(id => {
@@ -29,6 +30,19 @@ export function getDynamicConstraints() {
 
                 constraints.maxGpuLength = parseInt(value);
             }
+        }
+        
+        if (comp.component_type === "motherboard") {
+            const attrs = comp.attributes || {};
+
+            if (attrs.ram_slots !== undefined) {
+                let value = attrs.ram_slots;
+                if (Array.isArray(value)) {
+                    value = value[0];
+                }
+                constraints.maxRam = parseInt(value);
+            }
+
         }
     });
 

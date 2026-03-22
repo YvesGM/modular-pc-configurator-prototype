@@ -27,9 +27,42 @@ export function toggleComponent(id, componentEl, type) {
         }
     }
 
+    if (type === "ram") {
+        const maxSlots = constraints.maxRam;
+
+        if (maxSlots != null) {
+            let totalModules = 0;
+
+            for (const cid of selectedComponents) {
+                const comp = componentMap[cid];
+                if (!comp) continue;
+
+                if (comp.component_type === "ram") {
+                    let modules = comp.attributes?.modules ?? 0;
+                    if (Array.isArray(modules)) {
+                        modules = modules[0];
+                    }
+                    totalModules += parseInt(modules) || 0;
+                }
+            }
+
+            let newModules = componentMap[id]?.attributes?.modules ?? 0;
+            if (Array.isArray(newModules)) {
+                newModules = newModules[0];
+            }
+
+            newModules = parseInt(newModules) || 0;
+            const futureTotal = totalModules + newModules;
+            if (futureTotal > maxSlots) {
+                alert(`Max ${maxSlots} RAM slots allowed`);
+                return;
+            }
+        }
+    }
+
     if (rule.mode === "single") {
         document.querySelectorAll(`.component_card[data-type="${type}"]`)
-            .forEach(compEl => compEl.classList.remove("selected"));
+            .forEach(componentEl => componentEl.classList.remove("selected"));
 
         for (let compId of selectedComponents) {
             if (componentMap[compId].component_type === type) {
@@ -55,13 +88,11 @@ export function toggleComponent(id, componentEl, type) {
             .filter(cid => componentMap[cid].component_type === type).length;
 
         let maxAllowed = rule.max;
-
-        // dynamisch überschreiben
         if (type === "hdd" && constraints.maxHdd !== null) {
             maxAllowed = constraints.maxHdd;
         }
 
-        if (maxAllowed && currentCount >= maxAllowed) {
+        if (type !== "ram" && maxAllowed && currentCount >= maxAllowed) {
             alert(`Max ${maxAllowed} ${type} allowed`);
             return;
         }
@@ -72,12 +103,12 @@ export function toggleComponent(id, componentEl, type) {
 
     renderSelectedComponents();
     validateLive();
+
 }
 
 export function removeComponent(id) {
 
     selectedComponents.delete(id);
-
     document.querySelectorAll(".component_card").forEach(card => {
         if (parseInt(card.dataset.id) === id) {
             card.classList.remove("selected", "valid", "invalid");

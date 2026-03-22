@@ -7,28 +7,52 @@ class CurrencyRepository extends DatabaseRepoConnections
 
     public function getAllCurrencies(): array
     {
-        $allCurrencies = $this->CONFIGURATOR_DB->query("
+        $currencyDBData = $this->CONFIGURATOR_DB->query("
         SELECT
             cur.*
         FROM currencies cur
     ");
 
-        return $allCurrencies->fetchAll();
+        return $currencyDBData->fetchAll();
+    }
+
+    public function getCurrencyById(int $id): array {
+        if ($id <= 0) {
+            throw new Exception("(Currency ID cannot be 0 or negative! [$id])");
+        }
+
+        $currencyDBData = $this->CONFIGURATOR_DB->prepare("
+            SELECT
+                cur.*
+            FROM currencies cur
+            WHERE id = :id
+        ");
+
+        $this->bindAndExecute($currencyDBData, [
+            ':id' => $id
+        ]);
+
+        $currencySymbol = $currencyDBData->fetch();
+
+        if (!$currencySymbol) {
+            throw new Exception("(No currency found for ID: [$id])");
+        }
+        return $currencySymbol;
     }
 
     public function getCurrencyByCode(string $code): array
     {
-        $selectedCurCodes = $this->CONFIGURATOR_DB->prepare("
+        $currencyDBData = $this->CONFIGURATOR_DB->prepare("
         Select
-            curC.*
-        FROM currencies curC WHERE code = :code 
+            cur.*
+        FROM currencies cur WHERE code = :code 
     ");
 
-        $this->bindAndExecute($selectedCurCodes, [
+        $this->bindAndExecute($currencyDBData, [
             ":code" => $code
         ]);
 
-        return $selectedCurCodes->fetch();
+        return $currencyDBData->fetch();
     }
 
     public function getCurrencyCodeById(int $id): string
@@ -38,8 +62,9 @@ class CurrencyRepository extends DatabaseRepoConnections
         }
 
         $selectedComponentCurrency = $this->CONFIGURATOR_DB->prepare("
-        SELECT code
-        FROM currencies
+        SELECT 
+            cur.code
+        FROM currencies cur
         WHERE id = :id
     ");
 

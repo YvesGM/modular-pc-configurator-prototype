@@ -10,10 +10,16 @@ class ComponentsService extends ConfiguratorRepository
 
         $selectedComponent['attributes'] = $this->compAttributesRepository
             ->mappedComponentAttributes($componentId);
-
+        
+        $selectedComponent = $this->enrichComponent($selectedComponent);
         return $selectedComponent;
     }
 
+    private function enrichComponent(array $component): array {
+        $component['currency_symbol'] = $this->currencyRepository->getCurrencyById($component['currency_id'])['symbol'];
+        return $component;
+    }
+    
     public function getAllComponentsWithAttributes(): array
     {
         $allComponents = $this->componentsRepository->getAllComponents();
@@ -26,4 +32,4 @@ class ComponentsService extends ConfiguratorRepository
 
         return $components;
     }
-}
+};

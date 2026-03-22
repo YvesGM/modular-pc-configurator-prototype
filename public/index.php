@@ -41,7 +41,7 @@
 
     </footer>
 
-    <script type="module" src="assets/js/configurator/components.js"></script>
+    <script type="module" src="assets/js/configurator/init.js"></script>
     <script type="module" src="assets/js/configurator/api/sendConfig.js"></script>
 
 </body>
