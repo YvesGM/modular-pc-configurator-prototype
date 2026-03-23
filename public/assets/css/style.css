@@ -1,11 +1,33 @@
 * {
     margin: 0;
     box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 :root {
     --header-h: 60px;
     --footer-h: 80px;
+
+    --bg-main: #0b0f14;
+    --bg-surface: #121821;
+    --bg-card: #18212b;
+    --bg-hover: #1f2a36;
+
+    --border: #2a3644;
+    --border-light: #3a4756;
+
+    --text-primary: #e6edf3;
+    --text-secondary: #9fb0c3;
+    --text-muted: #6b7a8c;
+
+    --accent: #3b82f6;
+    --accent-2: #3b83f650;
+    --accent-hover: #2563eb;
+    --accent-glow: rgba(59, 130, 246, 0.25);
+
+    --success: #22c55e;
+    --error: #ef4444;
 }
 
 html {
@@ -13,15 +35,35 @@ html {
 }
 
 body {
-    background: #000000;
-    color: #e2e8f0;
-    font-family: Arial, sans-serif;
-    overflow-y: hidden;
+    font-family: Inter, Arial, sans-serif;
+
     min-height: 100vh;
+
+    color: var(--text-primary);
+    background: radial-gradient(circle at 20% 10%,
+            rgba(59, 130, 246, 0.08),
+            transparent 40%),
+        radial-gradient(circle at 80% 90%,
+            rgba(59, 130, 246, 0.05),
+            transparent 50%),
+        var(--bg-main);
+
+    overflow-y: hidden;
 }
 
 h1 {
     text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+h3 {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+
+    color: var(--text-secondary);
 }
 
 select {
@@ -40,56 +82,3 @@ select {
 .error {
     color: #ef4444;
 }
-
-.selected_section {
-    margin-bottom: 15px;
-    padding: 10px;
-    border: 1px solid #ccc;
-}
-
-.selected_item {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px;
-    margin: 3px 0;
-    background: #383838;
-}
-
-.selected_item button {
-    background: red;
-    width: 100px;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-.component_card {
-    padding: 10px;
-    margin: 5px;
-    border: 1px solid #ccc;
-    cursor: pointer;
-}
-
-.component_card.selected {
-    border: 2px solid #007bff;
-}
-
-.component_card.valid {
-    border: 2px solid green;
-}
-
-.component_card.invalid {
-    border: 2px solid red;
-    background-color: #585858;
-}
-
-.card_errors {
-    margin-top: 8px;
-    font-size: 12px;
-    color: red;
-}
-
-.error_line {
-    margin-top: 2px;
-}
-

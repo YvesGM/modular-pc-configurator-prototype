@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    
     <title>PC Configurator</title>
 
     <link rel="stylesheet" href="assets/css/style.css">
