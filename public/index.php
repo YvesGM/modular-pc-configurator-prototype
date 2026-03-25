@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    
+
     <title>PC Configurator</title>
 
     <link rel="stylesheet" href="assets/css/style.css">
@@ -22,6 +22,10 @@
     <main>
 
         <div class="configurator">
+            <div class="mode_switch">
+                <button id="expert-btn">Expert Mode</button>
+                <button id="simple-btn">Simple Mode</button>
+            </div>
             <div>
                 <label for="component-container">Components</label>
                 <div class="component_container" id="component-container"></div>
@@ -33,7 +37,7 @@
             <button onclick="sendConfig()">Check Configuration</button>
 
         </div>
-        
+
         <div id="output" class="output_box"></div>
 
     </main>
