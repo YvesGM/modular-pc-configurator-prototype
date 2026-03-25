@@ -25,4 +25,14 @@ class TaxRepository extends DatabaseRepoConnections
     {
         return $basicPrice * (1 + ($taxRate / 100));
     }
+
+    public function getTaxClasses(): array {
+        $taxClasses = $this->CONFIGURATOR_DB->query("
+            SELECT
+                tc.*,
+            FROM tax_classes tc
+        ");
+
+        return $taxClasses->fetchAll();
+    }
 }
