@@ -21,21 +21,7 @@
 
     <main>
 
-        <div class="configurator">
-            <div class="mode_switch">
-                <button id="expert-btn">Expert Mode</button>
-                <button id="simple-btn">Simple Mode</button>
-            </div>
-            <div>
-                <label for="component-container">Components</label>
-                <div class="component_container" id="component-container"></div>
-                <hr>
-                <h3>Selected Components</h3>
-                <div id="selected-container" class="selected_container"></div>
-            </div>
-
-            <button onclick="sendConfig()">Check Configuration</button>
-
+        <div class="configurator" id="configurator">
         </div>
 
         <div id="output" class="output_box"></div>
@@ -46,8 +32,8 @@
 
     </footer>
 
-    <script type="module" src="assets/js/configurator/init.js"></script>
-    <script type="module" src="assets/js/configurator/api/sendConfig.js"></script>
+    <script type="module" src="frontend/init/initializeConfigurator.js"></script>
+    <script type="module" src="frontend/expert-mode/api/results/sendConfig.js"></script>
 
 </body>
 
