@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '../../../../../backend/services/ConfiguratorService.php';
+require_once __DIR__ . '/../../../../../backend/controllers/ConfiguratorController.php';
 
 header('Content-Type: application/json');
 

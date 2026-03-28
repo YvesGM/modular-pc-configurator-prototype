@@ -19,7 +19,7 @@ export function applyValidationUI(config) {
 
         check.rules_checked.forEach(rule => {
 
-            if (!rule.passed) {
+            if (!rule.passed) { 
 
                 invalidIds.add(rule.component_a_id);
                 invalidIds.add(rule.component_b_id);

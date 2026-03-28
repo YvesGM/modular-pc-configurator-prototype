@@ -1,5 +1,5 @@
 import { componentsUI } from "../../../ui/modes/renderExpertMode.js";
-import { renderSimpleModeUi } from "../../../frontend/simple-mode/simpleModeUi.js";
+import { renderSimpleModeUi } from "../../../simple-mode/simpleModeUi.js";
 
 let currentMode = "expert";
 let cachedData = [];

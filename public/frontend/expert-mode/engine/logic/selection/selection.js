@@ -99,7 +99,7 @@ export function toggleComponent(componentId, componentEl, componentType) {
             return;
         }
 
-        SELECTEDCOMPONENTS.add(id);
+        SELECTEDCOMPONENTS.add(componentId);
         componentEl.classList.add("selected");
     }
 
