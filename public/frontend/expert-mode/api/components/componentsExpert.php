@@ -15,7 +15,7 @@ try {
         'data' => $components
     ]);
 
-} catch (Exception $e) {
+} catch (Throwable $e) {
 
     http_response_code(500);
 

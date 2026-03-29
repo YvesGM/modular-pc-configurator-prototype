@@ -1,4 +1,3 @@
--- Phase 3 - Database Schema
 -- Pricing-Details
 CREATE TABLE
     currencies (

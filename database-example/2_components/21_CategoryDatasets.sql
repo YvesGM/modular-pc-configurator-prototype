@@ -1,4 +1,3 @@
--- Phase 3 - Datasets
 -- component_categories
 INSERT INTO
     component_categories (name, description)
