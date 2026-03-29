@@ -13,7 +13,7 @@ VALUES
     -- #51
     (
         'Corsair SF750 750W 80+ Platinum',
-        10,
+        11,
         'Corsair',
         'SF750 750W 80+ Platinum',
         169.99,
@@ -24,7 +24,7 @@ VALUES
     -- #52
     (
         'Corsair SF600 600W 80+ Gold',
-        10,
+        11,
         'Corsair',
         'SF600 600W 80+ Gold',
         139.99,
@@ -35,7 +35,7 @@ VALUES
     -- #53
     (
         'SilverStone SX700-LPT 700W 80+ Platinum',
-        10,
+        11,
         'SilverStone',
         'SX700-LPT 700W 80+ Platinum',
         159.99,
@@ -46,7 +46,7 @@ VALUES
     -- #54
     (
         'Cooler Master V650 SFX Gold 650W',
-        10,
+        11,
         'Cooler Master',
         'V650 SFX Gold 650W',
         149.99,
@@ -57,7 +57,7 @@ VALUES
     -- #55
     (
         'be quiet! SFX Power 3 450W 80+ Bronze',
-        10,
+        11,
         'be quiet!',
         'SFX Power 3 450W 80+ Bronze',
         89.99,

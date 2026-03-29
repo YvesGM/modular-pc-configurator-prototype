@@ -13,7 +13,7 @@ VALUES
     -- #66
     (
         'Phanteks Neon Digital RGB LED Strip 400mm',
-        13,
+        14,
         'Phanteks',
         'Neon Digital RGB 400mm',
         24.99,
@@ -24,7 +24,7 @@ VALUES
     -- #67
     (
         'Corsair iCUE LS100 RGB LED Strip 450mm',
-        13,
+        14,
         'Corsair',
         'LS100 RGB Strip 450mm',
         39.99,
@@ -35,7 +35,7 @@ VALUES
     -- #68
     (
         'NZXT Hue 2 RGB LED Strip',
-        13,
+        14,
         'NZXT',
         'Hue 2 RGB Strip',
         29.99,
@@ -46,7 +46,7 @@ VALUES
     -- #69
     (
         'Cooler Master Addressable RGB LED Strip',
-        13,
+        14,
         'Cooler Master',
         'ARGB LED Strip',
         19.99,
@@ -57,7 +57,7 @@ VALUES
     -- #70
     (
         'DeepCool RGB 200 Pro LED Strip',
-        13,
+        14,
         'DeepCool',
         'RGB 200 Pro',
         17.99,

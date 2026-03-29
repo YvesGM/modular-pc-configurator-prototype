@@ -13,7 +13,7 @@ VALUES
     -- # 106
     (
         'CPU-Z System Utility',
-        21,
+        22,
         'CPUID',
         'CPU-Z',
         0.00,
@@ -24,7 +24,7 @@ VALUES
     -- # 107
     (
         'HWMonitor System Monitor',
-        21,
+        22,
         'CPUID',
         'HWMonitor',
         0.00,
@@ -35,7 +35,7 @@ VALUES
     -- # 108
     (
         'MSI Afterburner',
-        21,
+        22,
         'MSI',
         'Afterburner',
         0.00,
@@ -46,7 +46,7 @@ VALUES
     -- # 109
     (
         'CrystalDiskInfo',
-        21,
+        22,
         'Crystal Dew World',
         'CrystalDiskInfo',
         0.00,
@@ -57,7 +57,7 @@ VALUES
     -- # 110
     (
         '3DMark Benchmark Suite',
-        21,
+        22,
         'UL Solutions',
         '3DMark',
         29.99,

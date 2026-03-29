@@ -13,7 +13,7 @@ VALUES
     -- # 111
     (
         'Test CPU Alpha',
-        1,
+        23,
         'TestBrand',
         'Alpha-1000',
         0.00,
@@ -24,7 +24,7 @@ VALUES
     -- # 112
     (
         'Test CPU Beta',
-        1,
+        23,
         'TestBrand',
         'Beta-2000',
         0.00,
@@ -35,7 +35,7 @@ VALUES
     -- # 113
     (
         'Test CPU Gamma',
-        1,
+        23,
         'TestBrand',
         'Gamma-3000',
         0.00,

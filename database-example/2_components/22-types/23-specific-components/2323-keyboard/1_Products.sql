@@ -13,7 +13,7 @@ VALUES
     -- #86
     (
         'Corsair K95 RGB Platinum Mechanical Keyboard',
-        17,
+        18,
         'Corsair',
         'K95 RGB Platinum',
         199.99,
@@ -24,7 +24,7 @@ VALUES
     -- #87
     (
         'Logitech G Pro X Mechanical Keyboard',
-        17,
+        18,
         'Logitech',
         'G Pro X',
         149.99,
@@ -35,7 +35,7 @@ VALUES
     -- #88
     (
         'Razer BlackWidow V3 Mechanical Keyboard',
-        17,
+        18,
         'Razer',
         'BlackWidow V3',
         139.99,
@@ -46,7 +46,7 @@ VALUES
     -- #89
     (
         'SteelSeries Apex Pro Gaming Keyboard',
-        17,
+        18,
         'SteelSeries',
         'Apex Pro',
         209.99,
@@ -57,7 +57,7 @@ VALUES
     -- #90
     (
         'HyperX Alloy Core RGB Keyboard',
-        17,
+        18,
         'HyperX',
         'Alloy Core RGB',
         69.99,

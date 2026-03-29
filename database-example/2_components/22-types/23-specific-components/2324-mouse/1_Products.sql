@@ -13,7 +13,7 @@ VALUES
     -- #91
     (
         'Logitech G Pro X Superlight',
-        18,
+        19,
         'Logitech',
         'G Pro X Superlight',
         159.99,
@@ -24,7 +24,7 @@ VALUES
     -- #92
     (
         'Razer DeathAdder V3 Pro',
-        18,
+        19,
         'Razer',
         'DeathAdder V3 Pro',
         149.99,
@@ -35,7 +35,7 @@ VALUES
     -- #93
     (
         'SteelSeries Rival 5 Gaming Mouse',
-        18,
+        19,
         'SteelSeries',
         'Rival 5',
         69.99,
@@ -46,7 +46,7 @@ VALUES
     -- #94
     (
         'Corsair M65 RGB Elite',
-        18,
+        19,
         'Corsair',
         'M65 RGB Elite',
         79.99,
@@ -57,7 +57,7 @@ VALUES
     -- #95
     (
         'HyperX Pulsefire Haste',
-        18,
+        19,
         'HyperX',
         'Pulsefire Haste',
         59.99,

@@ -13,7 +13,7 @@ VALUES
     -- #81
     (
         'ASUS TUF Gaming VG27AQ',
-        15,
+        17,
         'ASUS',
         'VG27AQ',
         379.99,
@@ -24,7 +24,7 @@ VALUES
     -- #82
     (
         'LG UltraGear 27GP850-B',
-        15,
+        17,
         'LG',
         '27GP850-B',
         429.99,
@@ -35,7 +35,7 @@ VALUES
     -- #83
     (
         'Samsung Odyssey G5 32',
-        15,
+        17,
         'Samsung',
         'Odyssey G5 32',
         329.99,
@@ -46,7 +46,7 @@ VALUES
     -- #84
     (
         'Dell UltraSharp U2723QE',
-        15,
+        17,
         'Dell',
         'U2723QE',
         579.99,
@@ -57,7 +57,7 @@ VALUES
     -- #85
     (
         'AOC 24G2SP Gaming Monitor',
-        15,
+        17,
         'AOC',
         '24G2SP',
         219.99,

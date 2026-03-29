@@ -13,7 +13,7 @@ VALUES
     -- #96
     (
         'Microsoft Windows 11 Home',
-        19,
+        20,
         'Microsoft',
         'Windows 11 Home',
         129.99,
@@ -24,7 +24,7 @@ VALUES
     -- #97
     (
         'Microsoft Windows 11 Pro',
-        19,
+        20,
         'Microsoft',
         'Windows 11 Pro',
         199.99,
@@ -35,7 +35,7 @@ VALUES
     -- #98
     (
         'Ubuntu Desktop 24.04 LTS',
-        19,
+        20,
         'Canonical',
         'Ubuntu 24.04 LTS',
         0.00,
@@ -46,7 +46,7 @@ VALUES
     -- #99
     (
         'Fedora Workstation',
-        19,
+        20,
         'Fedora Project',
         'Fedora Workstation',
         0.00,
@@ -57,7 +57,7 @@ VALUES
     -- # 100
     (
         'Windows 10 Pro',
-        19,
+        20,
         'Microsoft',
         'Windows 10 Pro',
         149.99,

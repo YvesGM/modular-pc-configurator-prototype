@@ -13,7 +13,7 @@ VALUES
     -- #71
     (
         'Corsair Commander Core XT Fan Controller',
-        14,
+        15,
         'Corsair',
         'Commander Core XT',
         59.99,
@@ -24,7 +24,7 @@ VALUES
     -- #72
     (
         'NZXT RGB & Fan Controller',
-        14,
+        15,
         'NZXT',
         'RGB & Fan Controller',
         49.99,
@@ -35,7 +35,7 @@ VALUES
     -- #73
     (
         'DeepCool FH-10 Fan Hub',
-        14,
+        15,
         'DeepCool',
         'FH-10',
         19.99,
@@ -46,7 +46,7 @@ VALUES
     -- #74
     (
         'SilverStone CPF04 PWM Fan Hub',
-        14,
+        15,
         'SilverStone',
         'CPF04',
         17.99,
@@ -57,7 +57,7 @@ VALUES
     -- #75
     (
         'Cooler Master ARGB & PWM Fan Hub',
-        14,
+        15,
         'Cooler Master',
         'ARGB & PWM Fan Hub',
         29.99,

@@ -458,7 +458,7 @@ VALUES
             FROM
                 component_types
             WHERE
-                name = 'wi-fi_card'
+                name = 'wifi_card'
         ),
         (
             SELECT

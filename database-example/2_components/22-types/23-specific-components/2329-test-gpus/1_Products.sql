@@ -13,7 +13,7 @@ VALUES
     -- # 114
     (
         'Test GPU Alpha',
-        2,
+        24,
         'TestBrand',
         'GPU-A1',
         0.00,
@@ -24,7 +24,7 @@ VALUES
     -- # 115
     (
         'Test GPU Beta',
-        2,
+        24,
         'TestBrand',
         'GPU-B2',
         0.00,
@@ -35,7 +35,7 @@ VALUES
     -- # 116
     (
         'Test GPU Gamma',
-        2,
+        24,
         'TestBrand',
         'GPU-C3',
         0.00,

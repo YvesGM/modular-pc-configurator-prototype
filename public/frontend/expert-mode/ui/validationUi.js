@@ -25,15 +25,15 @@ export function applyValidationUI(config) {
                 invalidIds.add(rule.component_b_id);
 
                 if (!errorMap[rule.component_a_id]) {
-                    errorMap[rule.component_a_id] = [];
+                    errorMap[rule.component_a_id] = new Set();
                 }
 
                 if (!errorMap[rule.component_b_id]) {
-                    errorMap[rule.component_b_id] = [];
+                    errorMap[rule.component_b_id] = new Set();
                 }
 
-                errorMap[rule.component_a_id].push(rule.description);
-                errorMap[rule.component_b_id].push(rule.description);
+                errorMap[rule.component_a_id].add(rule.description);
+                errorMap[rule.component_b_id].add(rule.description);
             }
         });
     });

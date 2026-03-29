@@ -1,8 +1,8 @@
 INSERT INTO
-    currencies (code, symbol, name)
+    currencies (code, symbol, name, exchange_rate, is_base)
 VALUES
 -- #1
-    ('EUR', '€', 'Euro'),
+    ('EUR', '€', 'Euro', '0.93', '1'),
 
 -- #2
-    ('USD', '$', 'US-Dollar');
+    ('USD', '$', 'US-Dollar', '1.07', '1');

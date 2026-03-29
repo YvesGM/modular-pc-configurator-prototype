@@ -13,7 +13,7 @@ VALUES
     -- # 117
     (
         'Test RAM 16GB Kit',
-        3,
+        25,
         'TestBrand',
         'RAM-16',
         0.00,
@@ -24,7 +24,7 @@ VALUES
     -- # 118
     (
         'Test RAM 32GB Kit',
-        3,
+        25,
         'TestBrand',
         'RAM-32',
         0.00,
@@ -35,7 +35,7 @@ VALUES
     -- # 119
     (
         'Test RAM 64GB Kit',
-        3,
+        25,
         'TestBrand',
         'RAM-64',
         0.00,

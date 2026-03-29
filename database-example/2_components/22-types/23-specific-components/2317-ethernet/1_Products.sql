@@ -13,7 +13,7 @@ VALUES
     -- #56
     (
         'TP-Link TG-3468 Gigabit PCIe Network Adapter',
-        11,
+        12,
         'TP-Link',
         'TG-3468',
         14.99,
@@ -24,7 +24,7 @@ VALUES
     -- #57
     (
         'Intel EXPI9301CT Gigabit PCIe Network Adapter',
-        11,
+        12,
         'Intel',
         'EXPI9301CT',
         34.99,
@@ -35,7 +35,7 @@ VALUES
     -- #58
     (
         'ASUS XG-C100C 10G Network Adapter',
-        11,
+        12,
         'ASUS',
         'XG-C100C',
         109.99,
@@ -46,7 +46,7 @@ VALUES
     -- #59
     (
         'TP-Link TX201 2.5G PCIe Network Adapter',
-        11,
+        12,
         'TP-Link',
         'TX201',
         39.99,
@@ -57,7 +57,7 @@ VALUES
     -- #60
     (
         'Intel X550-T2 10G Dual Port Network Adapter',
-        11,
+        12,
         'Intel',
         'X550-T2',
         299.99,

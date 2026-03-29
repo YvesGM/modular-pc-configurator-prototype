@@ -13,7 +13,7 @@ VALUES
     -- #61
     (
         'TP-Link Archer TX3000E WiFi 6 PCIe Adapter',
-        12,
+        13,
         'TP-Link',
         'Archer TX3000E',
         49.99,
@@ -24,7 +24,7 @@ VALUES
     -- #62
     (
         'ASUS PCE-AX58BT WiFi 6 PCIe Adapter',
-        12,
+        13,
         'ASUS',
         'PCE-AX58BT',
         59.99,
@@ -35,7 +35,7 @@ VALUES
     -- #63
     (
         'Intel AX200 WiFi 6 M.2 Adapter',
-        12,
+        13,
         'Intel',
         'AX200',
         29.99,
@@ -46,7 +46,7 @@ VALUES
     -- #64
     (
         'TP-Link Archer TXE75E WiFi 6E PCIe Adapter',
-        12,
+        13,
         'TP-Link',
         'Archer TXE75E',
         79.99,
@@ -57,7 +57,7 @@ VALUES
     -- #65
     (
         'Gigabyte GC-WBAX210 WiFi 6E PCIe Adapter',
-        12,
+        13,
         'Gigabyte',
         'GC-WBAX210',
         69.99,

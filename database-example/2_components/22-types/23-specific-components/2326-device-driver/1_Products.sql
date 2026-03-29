@@ -13,7 +13,7 @@ VALUES
     -- # 101
     (
         'NVIDIA GeForce Game Ready Driver',
-        20,
+        21,
         'NVIDIA',
         'Game Ready Driver',
         0.00,
@@ -24,7 +24,7 @@ VALUES
     -- # 102
     (
         'AMD Adrenalin GPU Driver',
-        20,
+        21,
         'AMD',
         'Adrenalin Edition',
         0.00,
@@ -35,7 +35,7 @@ VALUES
     -- # 103
     (
         'Intel Chipset Device Software',
-        20,
+        21,
         'Intel',
         'Chipset INF Utility',
         0.00,
@@ -46,7 +46,7 @@ VALUES
     -- # 104
     (
         'Realtek High Definition Audio Driver',
-        20,
+        21,
         'Realtek',
         'HD Audio Driver',
         0.00,
@@ -57,7 +57,7 @@ VALUES
     -- # 105
     (
         'Intel Ethernet Adapter Driver',
-        20,
+        21,
         'Intel',
         'PROSet Ethernet Driver',
         0.00,

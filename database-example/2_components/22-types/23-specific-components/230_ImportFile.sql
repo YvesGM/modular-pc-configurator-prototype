@@ -119,12 +119,12 @@ VALUES
 
 -- Pricing
 INSERT INTO
-    currencies (code, symbol, name)
+    currencies (code, symbol, name, exchange_rate, is_base)
 VALUES
     -- #1
-    ('EUR', '€', 'Euro'),
+    ('EUR', '€', 'Euro', '0.93', '1'),
     -- #2
-    ('USD', '$', 'US-Dollar');
+    ('USD', '$', 'US-Dollar', '1.07', '1');
 
 INSERT INTO
     tax_classes (name, description)
@@ -729,7 +729,7 @@ VALUES
     -- #51
     (
         'Corsair SF750 750W 80+ Platinum',
-        10,
+        11,
         'Corsair',
         'SF750 750W 80+ Platinum',
         169.99,
@@ -740,7 +740,7 @@ VALUES
     -- #52
     (
         'Corsair SF600 600W 80+ Gold',
-        10,
+        11,
         'Corsair',
         'SF600 600W 80+ Gold',
         139.99,
@@ -751,7 +751,7 @@ VALUES
     -- #53
     (
         'SilverStone SX700-LPT 700W 80+ Platinum',
-        10,
+        11,
         'SilverStone',
         'SX700-LPT 700W 80+ Platinum',
         159.99,
@@ -762,7 +762,7 @@ VALUES
     -- #54
     (
         'Cooler Master V650 SFX Gold 650W',
-        10,
+        11,
         'Cooler Master',
         'V650 SFX Gold 650W',
         149.99,
@@ -773,7 +773,7 @@ VALUES
     -- #55
     (
         'be quiet! SFX Power 3 450W 80+ Bronze',
-        10,
+        11,
         'be quiet!',
         'SFX Power 3 450W 80+ Bronze',
         89.99,
@@ -784,7 +784,7 @@ VALUES
     -- #56
     (
         'TP-Link TG-3468 Gigabit PCIe Network Adapter',
-        11,
+        12,
         'TP-Link',
         'TG-3468',
         14.99,
@@ -795,7 +795,7 @@ VALUES
     -- #57
     (
         'Intel EXPI9301CT Gigabit PCIe Network Adapter',
-        11,
+        12,
         'Intel',
         'EXPI9301CT',
         34.99,
@@ -806,7 +806,7 @@ VALUES
     -- #58
     (
         'ASUS XG-C100C 10G Network Adapter',
-        11,
+        12,
         'ASUS',
         'XG-C100C',
         109.99,
@@ -817,7 +817,7 @@ VALUES
     -- #59
     (
         'TP-Link TX201 2.5G PCIe Network Adapter',
-        11,
+        12,
         'TP-Link',
         'TX201',
         39.99,
@@ -828,7 +828,7 @@ VALUES
     -- #60
     (
         'Intel X550-T2 10G Dual Port Network Adapter',
-        11,
+        12,
         'Intel',
         'X550-T2',
         299.99,
@@ -839,7 +839,7 @@ VALUES
     -- #61
     (
         'TP-Link Archer TX3000E WiFi 6 PCIe Adapter',
-        12,
+        13,
         'TP-Link',
         'Archer TX3000E',
         49.99,
@@ -850,7 +850,7 @@ VALUES
     -- #62
     (
         'ASUS PCE-AX58BT WiFi 6 PCIe Adapter',
-        12,
+        13,
         'ASUS',
         'PCE-AX58BT',
         59.99,
@@ -861,7 +861,7 @@ VALUES
     -- #63
     (
         'Intel AX200 WiFi 6 M.2 Adapter',
-        12,
+        13,
         'Intel',
         'AX200',
         29.99,
@@ -872,7 +872,7 @@ VALUES
     -- #64
     (
         'TP-Link Archer TXE75E WiFi 6E PCIe Adapter',
-        12,
+        13,
         'TP-Link',
         'Archer TXE75E',
         79.99,
@@ -883,7 +883,7 @@ VALUES
     -- #65
     (
         'Gigabyte GC-WBAX210 WiFi 6E PCIe Adapter',
-        12,
+        13,
         'Gigabyte',
         'GC-WBAX210',
         69.99,
@@ -894,7 +894,7 @@ VALUES
     -- #66
     (
         'Phanteks Neon Digital RGB LED Strip 400mm',
-        13,
+        14,
         'Phanteks',
         'Neon Digital RGB 400mm',
         24.99,
@@ -905,7 +905,7 @@ VALUES
     -- #67
     (
         'Corsair iCUE LS100 RGB LED Strip 450mm',
-        13,
+        14,
         'Corsair',
         'LS100 RGB Strip 450mm',
         39.99,
@@ -916,7 +916,7 @@ VALUES
     -- #68
     (
         'NZXT Hue 2 RGB LED Strip',
-        13,
+        14,
         'NZXT',
         'Hue 2 RGB Strip',
         29.99,
@@ -927,7 +927,7 @@ VALUES
     -- #69
     (
         'Cooler Master Addressable RGB LED Strip',
-        13,
+        14,
         'Cooler Master',
         'ARGB LED Strip',
         19.99,
@@ -938,7 +938,7 @@ VALUES
     -- #70
     (
         'DeepCool RGB 200 Pro LED Strip',
-        13,
+        14,
         'DeepCool',
         'RGB 200 Pro',
         17.99,
@@ -949,7 +949,7 @@ VALUES
     -- #71
     (
         'Corsair Commander Core XT Fan Controller',
-        14,
+        15,
         'Corsair',
         'Commander Core XT',
         59.99,
@@ -960,7 +960,7 @@ VALUES
     -- #72
     (
         'NZXT RGB & Fan Controller',
-        14,
+        15,
         'NZXT',
         'RGB & Fan Controller',
         49.99,
@@ -971,7 +971,7 @@ VALUES
     -- #73
     (
         'DeepCool FH-10 Fan Hub',
-        14,
+        15,
         'DeepCool',
         'FH-10',
         19.99,
@@ -982,7 +982,7 @@ VALUES
     -- #74
     (
         'SilverStone CPF04 PWM Fan Hub',
-        14,
+        15,
         'SilverStone',
         'CPF04',
         17.99,
@@ -993,7 +993,7 @@ VALUES
     -- #75
     (
         'Cooler Master ARGB & PWM Fan Hub',
-        14,
+        15,
         'Cooler Master',
         'ARGB & PWM Fan Hub',
         29.99,
@@ -1059,7 +1059,7 @@ VALUES
     -- #81
     (
         'ASUS TUF Gaming VG27AQ',
-        15,
+        17,
         'ASUS',
         'VG27AQ',
         379.99,
@@ -1070,7 +1070,7 @@ VALUES
     -- #82
     (
         'LG UltraGear 27GP850-B',
-        15,
+        17,
         'LG',
         '27GP850-B',
         429.99,
@@ -1081,7 +1081,7 @@ VALUES
     -- #83
     (
         'Samsung Odyssey G5 32',
-        15,
+        17,
         'Samsung',
         'Odyssey G5 32',
         329.99,
@@ -1092,7 +1092,7 @@ VALUES
     -- #84
     (
         'Dell UltraSharp U2723QE',
-        15,
+        17,
         'Dell',
         'U2723QE',
         579.99,
@@ -1103,7 +1103,7 @@ VALUES
     -- #85
     (
         'AOC 24G2SP Gaming Monitor',
-        15,
+        17,
         'AOC',
         '24G2SP',
         219.99,
@@ -1114,7 +1114,7 @@ VALUES
     -- #86
     (
         'Corsair K95 RGB Platinum Mechanical Keyboard',
-        17,
+        18,
         'Corsair',
         'K95 RGB Platinum',
         199.99,
@@ -1125,7 +1125,7 @@ VALUES
     -- #87
     (
         'Logitech G Pro X Mechanical Keyboard',
-        17,
+        18,
         'Logitech',
         'G Pro X',
         149.99,
@@ -1136,7 +1136,7 @@ VALUES
     -- #88
     (
         'Razer BlackWidow V3 Mechanical Keyboard',
-        17,
+        18,
         'Razer',
         'BlackWidow V3',
         139.99,
@@ -1147,7 +1147,7 @@ VALUES
     -- #89
     (
         'SteelSeries Apex Pro Gaming Keyboard',
-        17,
+        18,
         'SteelSeries',
         'Apex Pro',
         209.99,
@@ -1158,7 +1158,7 @@ VALUES
     -- #90
     (
         'HyperX Alloy Core RGB Keyboard',
-        17,
+        18,
         'HyperX',
         'Alloy Core RGB',
         69.99,
@@ -1169,7 +1169,7 @@ VALUES
     -- #91
     (
         'Logitech G Pro X Superlight',
-        18,
+        19,
         'Logitech',
         'G Pro X Superlight',
         159.99,
@@ -1180,7 +1180,7 @@ VALUES
     -- #92
     (
         'Razer DeathAdder V3 Pro',
-        18,
+        19,
         'Razer',
         'DeathAdder V3 Pro',
         149.99,
@@ -1191,7 +1191,7 @@ VALUES
     -- #93
     (
         'SteelSeries Rival 5 Gaming Mouse',
-        18,
+        19,
         'SteelSeries',
         'Rival 5',
         69.99,
@@ -1202,7 +1202,7 @@ VALUES
     -- #94
     (
         'Corsair M65 RGB Elite',
-        18,
+        19,
         'Corsair',
         'M65 RGB Elite',
         79.99,
@@ -1213,7 +1213,7 @@ VALUES
     -- #95
     (
         'HyperX Pulsefire Haste',
-        18,
+        19,
         'HyperX',
         'Pulsefire Haste',
         59.99,
@@ -1224,7 +1224,7 @@ VALUES
     -- #96
     (
         'Microsoft Windows 11 Home',
-        19,
+        20,
         'Microsoft',
         'Windows 11 Home',
         129.99,
@@ -1235,7 +1235,7 @@ VALUES
     -- #97
     (
         'Microsoft Windows 11 Pro',
-        19,
+        20,
         'Microsoft',
         'Windows 11 Pro',
         199.99,
@@ -1246,7 +1246,7 @@ VALUES
     -- #98
     (
         'Ubuntu Desktop 24.04 LTS',
-        19,
+        20,
         'Canonical',
         'Ubuntu 24.04 LTS',
         0.00,
@@ -1257,7 +1257,7 @@ VALUES
     -- #99
     (
         'Fedora Workstation',
-        19,
+        20,
         'Fedora Project',
         'Fedora Workstation',
         0.00,
@@ -1268,7 +1268,7 @@ VALUES
     -- # 100
     (
         'Windows 10 Pro',
-        19,
+        20,
         'Microsoft',
         'Windows 10 Pro',
         149.99,
@@ -1279,7 +1279,7 @@ VALUES
     -- # 101
     (
         'NVIDIA GeForce Game Ready Driver',
-        20,
+        21,
         'NVIDIA',
         'Game Ready Driver',
         0.00,
@@ -1290,7 +1290,7 @@ VALUES
     -- # 102
     (
         'AMD Adrenalin GPU Driver',
-        20,
+        21,
         'AMD',
         'Adrenalin Edition',
         0.00,
@@ -1301,7 +1301,7 @@ VALUES
     -- # 103
     (
         'Intel Chipset Device Software',
-        20,
+        21,
         'Intel',
         'Chipset INF Utility',
         0.00,
@@ -1312,7 +1312,7 @@ VALUES
     -- # 104
     (
         'Realtek High Definition Audio Driver',
-        20,
+        21,
         'Realtek',
         'HD Audio Driver',
         0.00,
@@ -1323,7 +1323,7 @@ VALUES
     -- # 105
     (
         'Intel Ethernet Adapter Driver',
-        20,
+        21,
         'Intel',
         'PROSet Ethernet Driver',
         0.00,
@@ -1334,7 +1334,7 @@ VALUES
     -- # 106
     (
         'CPU-Z System Utility',
-        21,
+        22,
         'CPUID',
         'CPU-Z',
         0.00,
@@ -1345,7 +1345,7 @@ VALUES
     -- # 107
     (
         'HWMonitor System Monitor',
-        21,
+        22,
         'CPUID',
         'HWMonitor',
         0.00,
@@ -1356,7 +1356,7 @@ VALUES
     -- # 108
     (
         'MSI Afterburner',
-        21,
+        22,
         'MSI',
         'Afterburner',
         0.00,
@@ -1367,7 +1367,7 @@ VALUES
     -- # 109
     (
         'CrystalDiskInfo',
-        21,
+        22,
         'Crystal Dew World',
         'CrystalDiskInfo',
         0.00,
@@ -1378,7 +1378,7 @@ VALUES
     -- # 110
     (
         '3DMark Benchmark Suite',
-        21,
+        22,
         'UL Solutions',
         '3DMark',
         29.99,
@@ -1389,7 +1389,7 @@ VALUES
     -- # 111
     (
         'Test CPU Alpha',
-        1,
+        23,
         'TestBrand',
         'Alpha-1000',
         0.00,
@@ -1400,7 +1400,7 @@ VALUES
     -- # 112
     (
         'Test CPU Beta',
-        1,
+        23,
         'TestBrand',
         'Beta-2000',
         0.00,
@@ -1411,7 +1411,7 @@ VALUES
     -- # 113
     (
         'Test CPU Gamma',
-        1,
+        23,
         'TestBrand',
         'Gamma-3000',
         0.00,
@@ -1422,7 +1422,7 @@ VALUES
     -- # 114
     (
         'Test GPU Alpha',
-        2,
+        24,
         'TestBrand',
         'GPU-A1',
         0.00,
@@ -1433,7 +1433,7 @@ VALUES
     -- # 115
     (
         'Test GPU Beta',
-        2,
+        24,
         'TestBrand',
         'GPU-B2',
         0.00,
@@ -1444,7 +1444,7 @@ VALUES
     -- # 116
     (
         'Test GPU Gamma',
-        2,
+        24,
         'TestBrand',
         'GPU-C3',
         0.00,
@@ -1455,7 +1455,7 @@ VALUES
     -- # 117
     (
         'Test RAM 16GB Kit',
-        3,
+        25,
         'TestBrand',
         'RAM-16',
         0.00,
@@ -1466,7 +1466,7 @@ VALUES
     -- # 118
     (
         'Test RAM 32GB Kit',
-        3,
+        25,
         'TestBrand',
         'RAM-32',
         0.00,
@@ -1477,7 +1477,7 @@ VALUES
     -- # 119
     (
         'Test RAM 64GB Kit',
-        3,
+        25,
         'TestBrand',
         'RAM-64',
         0.00,
@@ -2532,5 +2532,3 @@ VALUES
     (119, 19, '4'),
     (119, 20, '6000'),
     (119, 98, 'Test_RAM_3');
-
-
