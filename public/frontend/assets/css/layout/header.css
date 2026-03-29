@@ -1,3 +1,24 @@
 header {
-    height: var(--header-h);
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+
+    width: 100%;
+    height: var(--header-height);
+}
+
+.header_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    max-width: 1920px;
+}
+
+.header_logo {
+    width: 240px;
+    height: auto;
 }

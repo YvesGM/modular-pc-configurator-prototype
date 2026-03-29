@@ -9,7 +9,6 @@ export function renderSelectedComponents() {
 
     const groupedComponents = {};
 
-    // Gruppieren nach Typ
     SELECTEDCOMPONENTS.forEach(id => {
         const component = COMPONENTMAP[id];
 
@@ -20,11 +19,10 @@ export function renderSelectedComponents() {
         groupedComponents[component.component_type].push(component);
     });
 
-    // UI bauen
     for (const componentType in groupedComponents) {
 
         const typeSection = document.createElement("div");
-        typeSection.className = "selected_section";
+        typeSection.className = "selected_type_section";
 
         const title = document.createElement("h4");
         title.textContent = componentType.toUpperCase();
