@@ -39,10 +39,13 @@ export function renderSelectedComponents() {
 
             const btn = document.createElement("button");
             btn.textContent = "❌";
+            btn.classList.add("delete_button")
             btn.onclick = () => removeComponent(comp.id);
 
             item.appendChild(label);
             item.appendChild(btn);
+            
+            typeSection.appendChild(item);
         });
 
         container.appendChild(typeSection);

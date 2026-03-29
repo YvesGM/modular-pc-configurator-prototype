@@ -1,7 +1,5 @@
 .component_section {
     padding: 0px 24px;
-    margin-bottom: 24px;
-
 }
 
 .component_list {
@@ -76,4 +74,10 @@
 
 .error_line {
     margin-top: 2px;
+}
+
+@media (max-width: 620px) {
+    .component_section {
+        padding: 0px;
+    }
 }

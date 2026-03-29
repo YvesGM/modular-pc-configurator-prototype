@@ -5,7 +5,7 @@ export async function sendConfig() {
 
     const selected = Array.from(SELECTEDCOMPONENTS);
 
-    const res = await fetch("configure.php", {
+    const res = await fetch("/modular-pc-configurator-prototyp/public/frontend/expert-mode/api/validation/validateExpert.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -19,8 +19,8 @@ export async function sendConfig() {
     const configurationBuild = await res.json();
     const config = configurationBuild.data;
     const clientOutput = document.getElementById("output");
+    clientOutput.classList.add("active");
     renderResults(config, clientOutput);
-
 }
 
 window.sendConfig = sendConfig;

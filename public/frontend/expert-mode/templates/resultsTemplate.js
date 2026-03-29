@@ -7,8 +7,6 @@ export function renderResults(config, container) {
             <div class="result_header">
                 ${config.compatibility.is_valid ? "Configuration valid" : "Configuration invalid"}
             </div>
-
-            <div class="result_checks"></div>
         </div>
     `;
 
@@ -26,8 +24,9 @@ export function renderResults(config, container) {
     });
 
     html += `
+        <div class="section_divider"></div>
         <div class="result_footer">
-            <span>Total</span>
+            <h3>Total</h3>
             <strong>${config.pricing.gross_total.toFixed(2)} ${config.pricing.currency}</strong>
         </div>
     `;

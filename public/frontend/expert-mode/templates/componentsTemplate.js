@@ -19,7 +19,7 @@ export function componentCardTemplate(component) {
             <small>${component.brand}</small><br>
             ${component.net_price} ${component.currency_symbol}
         </div>
-        <div class="card_error"></div> 
+        <div class="card_errors"></div> 
     `;
 
     componentCard.dataset.type = component.component_type;
