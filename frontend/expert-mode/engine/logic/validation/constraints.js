@@ -1,4 +1,4 @@
-import { SELECTEDCOMPONENTS, COMPONENTMAP } from "../../../../init/globalStates.js";
+import { SELECTEDCOMPONENTS, COMPONENTMAP } from "../../../../js/logic/globalStates.js";
 
 export function getDynamicConstraints() {
     let constraints = {

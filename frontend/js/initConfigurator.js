@@ -1,6 +1,6 @@
-import startTemplate from "./startTemplate.js";
-import loadComponentsListExpert from "../expert-mode/storage/loadComponentsList.js";
-import { setConfiguratorMode } from "./renderConfigurator.js";
+import startTemplate from "./logic/templates/startTemplate.js";
+import { getExpertList } from "../js/logic/helpers/getExpertComponents.js";
+import { setConfiguratorMode } from "./logic/render/renderConfigurator.js";
 
 
 window.onload = async () => {
@@ -15,7 +15,7 @@ window.onload = async () => {
     // };
 
     expertButton.onclick = async () => { 
-        await loadComponentsListExpert();
+        await getExpertList();
         setConfiguratorMode("expert"); };
 
 };

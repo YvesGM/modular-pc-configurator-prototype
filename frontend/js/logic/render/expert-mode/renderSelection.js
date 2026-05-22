@@ -1,6 +1,6 @@
 
-import { SELECTEDCOMPONENTS, COMPONENTMAP } from "../../init/globalStates.js";
-import { removeComponent } from "../engine/logic/selection/selection.js";
+import { SELECTEDCOMPONENTS, COMPONENTMAP } from "../../globalStates.js";
+import { removeComponent } from "../../../../expert-mode/engine/logic/selection/selection.js";
 
 export function renderSelectedComponents() {
 

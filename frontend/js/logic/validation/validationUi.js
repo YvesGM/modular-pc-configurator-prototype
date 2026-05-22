@@ -1,4 +1,4 @@
-import { SELECTEDCOMPONENTS } from "../../init/globalStates.js";
+import { SELECTEDCOMPONENTS } from "../globalStates.js";
 
 export function applyValidationUI(config) {
 

@@ -1,6 +1,6 @@
-import { SELECTEDCOMPONENTS } from "../../../../init/globalStates.js";
+import { SELECTEDCOMPONENTS } from "../../../../js/logic/globalStates.js";
 import { validateConfig } from "../../../api/validation/validateConfig.js";
-import { applyValidationUI } from "../../../ui/validationUi.js";
+import { applyValidationUI } from "../../../../js/logic/validation/validationUi.js";
 
 export async function validateLive() {
 

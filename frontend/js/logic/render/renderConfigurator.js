@@ -1,6 +1,6 @@
-import { FRONTENDCACHE } from "./globalStates.js";
+import { FRONTENDCACHE } from "../js/logic/globalStates.js";
 import emtemplate from "../expert-mode/templates/em_template.js"
-import renderExpertMode from "../expert-mode/render/renderExpertMode.js";
+import renderExpertMode from "./expert-mode/renderExpertMode.js";
 // import { renderSimpleModeUi } from "./simpleModeUi.js";
 
 let currentMode = "";

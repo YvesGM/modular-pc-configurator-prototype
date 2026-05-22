@@ -1,4 +1,4 @@
-import { SELECTEDCOMPONENTS, COMPONENTMAP } from "../../../../init/globalStates.js";
+import { SELECTEDCOMPONENTS, COMPONENTMAP } from "../../../../js/logic/globalStates.js";
 import { selectionRules } from "../../configs/selectionRules.js";
 
 import { renderSelectedComponents } from "../../../render/renderSelection.js";
